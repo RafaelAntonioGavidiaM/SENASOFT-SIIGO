@@ -41,7 +41,7 @@
       <h1 class="jugador4__nombre">rafa</h1>
     </div>
     <h1 id="mesaNumero" class="mesaNumero">
-      MESA N° 
+      MESA N°
       <?php
       session_start();
       $codigo = $_SESSION["partida"];
@@ -49,6 +49,45 @@
       ?>
     </h1>
     <input class="btnComenzar" type="button" value="Comenzar Partida" />
+
+    <div class="contenedor__revolver">
+      <div class="cartaR primera">
+        <div class="carta__frenteR">
+          <h1 class="titulo__carta__frenteR">SIIGO</h1>
+        </div>
+        <div class="carta__atrasR">
+          <div class="cabecera__cartaR">
+            <img class="imagen__cartaR" src="vista/img/jugador1.jpg" alt="">
+          </div>
+          <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
+        </div>
+      </div>
+      <div class="cartaR segunda">
+        <div class="carta__frenteR">
+          <h1 class="titulo__carta__frenteR">SIIGO</h1>
+        </div>
+        <div class="carta__atrasR">
+          <div class="cabecera__cartaR">
+            <img class="imagen__cartaR" src="vista/img/jugador1.jpg" alt="">
+          </div>
+          <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
+        </div>
+      </div>
+      <div class="cartaR tercera">
+        <div class="carta__frenteR">
+          <h1 class="titulo__carta__frenteR">SIIGO</h1>
+        </div>
+        <div class="carta__atrasR">
+          <div class="cabecera__cartaR">
+            <img class="imagen__cartaR" src="vista/img/jugador1.jpg" alt="">
+          </div>
+          <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
+        </div>
+      </div>
+    </div>
+
+
+<!-- CONTENEDOR CARTAS USUARIO -->
 
     <div class="col-sm-12 contenedorCartas">
       <h1 class="btnMostrarCartas">Mostrar Cartas</h1>
@@ -60,7 +99,7 @@
         </div>
         <div class="carta__atras">
           <div class="cabecera__carta">
-          <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
           </div>
           <h1>Nombre Carta</h1>
         </div>
@@ -72,7 +111,7 @@
         </div>
         <div class="carta__atras">
           <div class="cabecera__carta">
-          <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
           </div>
           <h1>Nombre Carta</h1>
         </div>
@@ -84,7 +123,7 @@
         </div>
         <div class="carta__atras">
           <div class="cabecera__carta">
-          <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
           </div>
           <h1>Nombre Carta</h1>
         </div>
@@ -96,15 +135,27 @@
         </div>
         <div class="carta__atras">
           <div class="cabecera__carta">
-          <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
           </div>
           <h1>Nombre Carta</h1>
         </div>
       </div>
 
     </div>
-    
+
   </div>
+  <div class="contenedorRandom">
+    <div class="container">
+      <div class="contenedorTuloRandom">
+        <h1 class="tituloRamdom">Revolviendo Cartas</h1>
+      </div>
+      <center>
+        <input class="btnSalirRandom" type="button" value="Parar" />
+      </center>
+    </div>
+  </div>
+
+
   <div class="contenedorEspera">
     <h1 class="tituloEspera">Partida En Espera</h1>
   </div>

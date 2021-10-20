@@ -2,11 +2,45 @@
 $(document).ready(function() {
     var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
     socket.on('variable', function(variable) {
+        
         console.log(variable);
+        cargarMesa(variable);
 
 
 
     });
+
+    var usuario="";
+
+    function cargarMesa(){
+        var cargarDatosmesa="ok";
+
+        var objData = new FormData();
+
+        objData.append("cargarDatosTabla",cargarDatosmesa);
+
+        $.ajax({
+            url:"control/juegoCrearControl.php",
+            type:"post",
+            dataType:"json",
+            data:objData,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success: function(respuesta){
+
+                $("#mesaNumero").html(respuesta);
+
+
+
+            }
+        })
+
+
+        
+    }
+
+    
 
 
 
@@ -40,8 +74,9 @@ $(document).ready(function() {
                 processData: false,
                 success: function(respuesta) {
                     alert(respuesta);
+                   
 
-
+                    cargarMesa();
                     socket.emit('variable', valorCodigo);
 
 

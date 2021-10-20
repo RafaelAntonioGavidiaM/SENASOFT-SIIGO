@@ -44,3 +44,8 @@ if(isset($_POST["nombreUsuario"]) && isset($_POST["codigo"])){
 
 
 }
+if(isset($_POST["cargarDatosTabla"])){
+
+
+
+}

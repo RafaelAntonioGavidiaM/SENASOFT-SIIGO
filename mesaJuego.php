@@ -59,17 +59,12 @@
     </div>
 
     <h1 id="mesaNumero">
-      <?php 
       
-      
+    <?php
     session_start();
-
-    $codPartida= $_SESSION["partida"];
-
-    echo json_encode($codPartida);
-
-      
-      ?>
+     $codigo =$_SESSION["partida"];
+     echo $codigo;
+    ?>
     </h1>
 
   </body>

@@ -77,7 +77,9 @@ $(document).ready(function() {
                    
 
                     cargarMesa();
-                    socket.emit('variable', valorCodigo);
+                    //socket.emit('variable', valorCodigo);
+
+                    window.location.replace("mesaJuego.php");
 
 
 

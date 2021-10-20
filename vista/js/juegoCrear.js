@@ -1,15 +1,64 @@
 // Rafael
-$(document).ready(function(){
-
-
-    $("#").click(function(){
-
-
-
+$(document).ready(function() {
+    var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
+    socket.on('variable', function(variable) {
+        console.log(variable);
 
 
 
-        
+    });
+
+
+
+    $("#btnCrear").click(function() {
+        alert("hola");
+
+        var usuario = $("#txtUsuario").val();
+        var codigo = "";
+        var valorCodigo = randomColor();
+        var nombreUsuarioAdm = $("#txtUsuario").val();
+        var codigo = "";
+
+        function randomColor() {
+            codigo = Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0');
+            //console.log(codigo);
+
+            return codigo;
+        }
+
+        var objData = new FormData();
+        objData.append("nombreUsuario", usuario);
+        objData.append("codigo", valorCodigo);
+
+        $.ajax({
+                url: "control/juegoCrearControl.php",
+                type: "post",
+                dataType: "json",
+                data: objData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(respuesta) {
+                    alert(respuesta);
+
+
+                    socket.emit('variable', valorCodigo);
+
+
+
+                }
+
+
+
+            }
+
+        )
+
+
+
+
+
+
     })
 
 
@@ -1226,5 +1275,3 @@ $(document).ready(function(){
     // Fin
 
 })
-
-

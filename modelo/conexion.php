@@ -8,7 +8,7 @@ class conexion
 
         $nombreServidor="localhost";
         $baseDatos="reto";
-        $usuarioServidor="";
+        $usuarioServidor="root";
         $password="";
 
         try {

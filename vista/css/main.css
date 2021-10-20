@@ -1,182 +1,204 @@
 @import url("https://fonts.googleapis.com/css2?family=Nova+Square&display=swap");
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
-  --colorPrincipal: #d82b2e;
+    --colorPrincipal: #d82b2e;
 }
 
 body {
-  font-family: "Nova Square", cursive;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    font-family: "Nova Square", cursive;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .container {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .wave1 {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
 }
+
 .wave2 {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-  height: 150px;
-  overflow: hidden;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
 }
+
 .panel {
-  width: 80%;
-  height: 400px;
+    width: 80%;
+    height: 450px;
 }
+
 .titulo {
-  color: var(--colorPrincipal);
-  text-align: center;
-  font-weight: bolder;
-  font-size: 5rem;
+    color: var(--colorPrincipal);
+    text-align: center;
+    font-weight: bolder;
+    font-size: 5rem;
 }
+
 .titulo2 {
-  font-size: 2rem;
+    font-size: 2rem;
 }
+
 .btn {
-  width: 100%;
-  height: 50px;
-  outline: none;
-  background: none;
-  border: 2px solid var(--colorPrincipal);
-  border-radius: 10px;
-  color: var(--colorPrincipal);
-  font-size: 2rem;
-  font-weight: bold;
-  transition: color, background, transform 0.5s ease;
-  margin: 10px 0px;
+    width: 100%;
+    height: 50px;
+    outline: none;
+    background: none;
+    border: 2px solid var(--colorPrincipal);
+    border-radius: 10px;
+    color: var(--colorPrincipal);
+    font-size: 2rem;
+    font-weight: bold;
+    transition: color, background, transform 0.5s ease;
+    margin: 10px 0px;
 }
+
 .btn:hover {
-  background: var(--colorPrincipal);
-  color: #fff;
-  box-shadow: 0px 0px 1rem var(--colorPrincipal);
-  transform: scale(1.02);
+    background: var(--colorPrincipal);
+    color: #fff;
+    box-shadow: 0px 0px 1rem var(--colorPrincipal);
+    transform: scale(1.02);
 }
+
 .form {
-  position: relative;
+    position: relative;
 }
+
 .usuario {
-  padding: 0px;
-  outline: none;
-  width: 100%;
-  height: 50px;
-  border: 0px;
-  border-bottom: 2px solid grey;
-  font-size: 2rem;
+    padding: 0px;
+    outline: none;
+    width: 100%;
+    height: 50px;
+    border: 0px;
+    border-bottom: 2px solid grey;
+    font-size: 2rem;
 }
-.usuario:focus + .labelUsuario,
-.usuario:not(:placeholder-shown) + .labelUsuario {
-  transform: translateY(-35px) translateX(-10px) scale(0.7);
-  transform-origin: left, bottom;
-  color: var(--colorPrincipal);
-  transition: 0.7s ease;
+
+.usuario:focus+.labelUsuario,
+.usuario:not(:placeholder-shown)+.labelUsuario {
+    transform: translateY(-35px) translateX(-10px) scale(0.7);
+    transform-origin: left, bottom;
+    color: var(--colorPrincipal);
+    transition: 0.7s ease;
 }
+
 .labelUsuario {
-  cursor: pointer;
-  padding: 0px;
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  color: gray;
-  font-size: 2rem;
-  transform: translateY(-11px);
-  transition: 0.7s ease;
+    cursor: pointer;
+    padding: 0px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    color: gray;
+    font-size: 2rem;
+    transform: translateY(-11px);
+    transition: 0.7s ease;
 }
-.usuario:focus ~ .lineUsuario,
-.usuario:not(:placeholder-shown) ~ .lineUsuario {
-  transform: scale(1);
-  transform-origin: left;
-  transition: 0.7s ease;
+
+.usuario:focus~.lineUsuario,
+.usuario:not(:placeholder-shown)~.lineUsuario {
+    transform: scale(1);
+    transform-origin: left;
+    transition: 0.7s ease;
 }
+
 .lineUsuario {
-  transform: scale(0);
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  background: var(--colorPrincipal);
-  width: 100%;
-  height: 2px;
+    transform: scale(0);
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    background: var(--colorPrincipal);
+    width: 100%;
+    height: 2px;
 }
+
 .unirse {
-  padding: 0px;
-  outline: none;
-  width: 100%;
-  height: 50px;
-  border: 0px;
-  border-bottom: 2px solid grey;
-  font-size: 2rem;
+    padding: 0px;
+    outline: none;
+    width: 100%;
+    height: 50px;
+    border: 0px;
+    border-bottom: 2px solid grey;
+    font-size: 2rem;
 }
-.unirse:focus + .label,
-.unirse:not(:placeholder-shown) + .label {
-  transform: translateY(-35px) translateX(-20px) scale(0.7);
-  transform-origin: left, bottom;
-  color: var(--colorPrincipal);
-  transition: 0.7s ease;
+
+.unirse:focus+.label,
+.unirse:not(:placeholder-shown)+.label {
+    transform: translateY(-35px) translateX(-20px) scale(0.7);
+    transform-origin: left, bottom;
+    color: var(--colorPrincipal);
+    transition: 0.7s ease;
 }
+
 .label {
-  cursor: pointer;
-  padding: 0px;
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  color: gray;
-  font-size: 2rem;
-  transform: translateY(-11px);
-  transition: 0.7s ease;
+    cursor: pointer;
+    padding: 0px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    color: gray;
+    font-size: 2rem;
+    transform: translateY(-11px);
+    transition: 0.7s ease;
 }
-.unirse:focus ~ .line,
-.unirse:not(:placeholder-shown) ~ .line {
-  transform: scale(1);
-  transform-origin: left;
-  transition: 0.7s ease;
+
+.unirse:focus~.line,
+.unirse:not(:placeholder-shown)~.line {
+    transform: scale(1);
+    transform-origin: left;
+    transition: 0.7s ease;
 }
+
 .line {
-  transform: scale(0);
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  background: var(--colorPrincipal);
-  width: 100%;
-  height: 2px;
+    transform: scale(0);
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    background: var(--colorPrincipal);
+    width: 100%;
+    height: 2px;
 }
+
 .img {
-    filter: drop-shadow(0px 0px .5rem var(--colorPrincipal));
-  width: 100%;
-  height: 300px;
-  animation: img 2s ease infinite;
+    margin-top: 30px;
+    width: 100%;
+    height: 300px;
+    animation: img 2s ease infinite;
 }
+
 @keyframes img {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
+
 .botones {
-  margin-top: 50px;
+    margin-top: 50px;
 }

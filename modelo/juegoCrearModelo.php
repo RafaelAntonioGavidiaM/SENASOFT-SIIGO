@@ -22,14 +22,8 @@ class modeloJuego{
 
         if($objIngreso->execute()){
 
-            $objIngreso= conexion::conectar()->prepare("SELECT idPartida from partida where codigoPartida=:c");
-            $objIngreso->bindParam(":c",$codigo,PDO::PARAM_STR);
-            $objIngreso->execute();
-            $idPartida=$objIngreso->fetch();
-
-            $id=$idPartida[0];
+            $id=modeloJuego::buscarIdPartida($codigo);
             $_SESSION["idPartida"]=$id;
-
 
 
 
@@ -56,6 +50,42 @@ class modeloJuego{
 
     }
 
+    public static function buscarIdPartida($codigoPartida){
+        $objIngreso= conexion::conectar()->prepare("SELECT idPartida from partida where codigoPartida=:c");
+            $objIngreso->bindParam(":c",$codigoPartida,PDO::PARAM_STR);
+            $objIngreso->execute();
+            $idPartida=$objIngreso->fetch();
+
+            $id=$idPartida[0];
+
+            return $id;
+            
+
+
+
+    } 
+
+    public static function unirmePartida($codigo,$usuario){
+
+        $idPartida=modeloJuego::buscarIdPartida($codigo);
+
+
+        $respuesta=modeloJuego::IngresarNombredeUsuario($usuario,$idPartida);
+
+        session_start();
+
+        
+
+       
+        $_SESSION["usuario"]=$usuario;
+        $_SESSION["partida"]=$codigo;
+        $_SESSION["idPartida"]=$idPartida;
+
+        return $respuesta;
+
+
+    }
+
     public static function IngresarNombredeUsuario($usuario,$codPartida){
 
         $mensaje="";
@@ -68,13 +98,13 @@ class modeloJuego{
 
         if($objInsertarUsuario->execute()){
 
-            $mensaje="Partida Creada";
+            $mensaje="ok";
 
 
 
         }else{
 
-            $mensaje="No se ha podido crear partida";
+            $mensaje="Problema al ingresar a la partida";
         }
 
         return $mensaje;

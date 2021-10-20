@@ -11,6 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
   <script src="vista/js/juegoCrear.js"></script>
+  <script src="vista/js/juegoEnEspera.js"></script>
   <script src="vista/js/juegoEnProceso.js"></script>
 </head>
 
@@ -46,10 +47,11 @@
       session_start();
       $codigo = $_SESSION["partida"];
       echo $codigo;
+      
       ?>
     </h1>
-    <input class="btnComenzar" type="button" value="Comenzar Partida" />
-
+    <div id="mostrarBoton"></div>
+    
     <div class="col-sm-12 contenedorCartas">
       <h1 class="btnMostrarCartas">Mostrar Cartas</h1>
       <h1 class="btnOcultarCartas">Ocultar Cartas</h1>

@@ -5,7 +5,7 @@ class modeloEspero{
 
 
     public static function mdlCargarUsuarios(){
-        session_start();
+       // session_start();
 
         $idPartida=$_SESSION["idPartida"];
 

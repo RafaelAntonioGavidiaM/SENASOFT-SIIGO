@@ -59,15 +59,14 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(respuesta) {
-            if(respuesta=="ok"){
+           
 
-                var valor ="ok";
-                socket.emit('recargarUsuario', valor);
+                
+                socket.emit('recargarUsuario', unirse);
 
-                window.location.replace("mesaJuego.php");
+                window.location.replace("mesaJuego.php?usuario="+respuesta+"");
 
 
-            }
                
 
                 
@@ -123,10 +122,14 @@ $(document).ready(function() {
                     alert(respuesta);
 
 
-                    cargarMesa();
-                    socket.emit('variable', valorCodigo);
+                    
 
-                    window.location.replace("mesaJuego.php");
+                    
+
+                
+                    
+
+                    window.location.replace("mesaJuego.php?usuario="+respuesta+"");
 
 
 

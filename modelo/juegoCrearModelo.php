@@ -37,17 +37,6 @@ class modeloJuego{
         return $registro;
 
 
-
-
-
-    
-
-
-
-
-
-
-
     }
 
     public static function buscarIdPartida($codigoPartida){
@@ -98,7 +87,7 @@ class modeloJuego{
 
         if($objInsertarUsuario->execute()){
 
-            $mensaje="ok";
+           $mensaje =modeloJuego::buscaridJugador($usuario,$codPartida);
 
 
 
@@ -109,6 +98,23 @@ class modeloJuego{
 
         return $mensaje;
 
+
+    }
+
+    public static function buscaridJugador($usuario,$codigoPartida)
+    {
+       // $id=modeloJuego::buscarIdPartida($codigoPartida);
+
+        $objConsultarid=conexion::conectar()->prepare("SELECT idusuario from usuariopartida where nombre  = :n and idpartida = :p");
+        $objConsultarid->bindParam(":n", $usuario,PDO::PARAM_STR);
+        $objConsultarid->bindParam(":p", $codigoPartida,PDO::PARAM_INT);
+        $objConsultarid->execute();
+        $idUsuarioPartida=$objConsultarid->fetch();
+        $usuario=$idUsuarioPartida[0];
+
+        return $usuario;
+
+        
 
     }
 

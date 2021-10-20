@@ -13,20 +13,31 @@
 
 <body>
 
-    <div class="col-sm-12 panelInicio">
-        <div class="col-sm-12 contenedorTitulo">
-            <h1 class="titulo">Encuentra el Bug en el Sistema</h1>
+    <div class="container">
+        <div class="wave1"><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C25.11,60.69 482.78,-53.78 500.00,49.98 L500.00,0.00 L0.00,0.00 Z" style="stroke: none; fill: #D82B2E;"></path></svg></div>
+        <div class="wave2"><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.28,131.73 C182.56,189.95 481.65,24.17 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #D82B2E;"></path></svg></div>
+        <div class="col-sm-12 panel">
+            <h1 class="titulo">Encuentra El Bug En El Sistema</h1>
+            <div class="col-sm-6 imagenes">
+                <img class="img" src="vista/img/control.svg" alt="">
+            </div>
+            <div class="col-sm-6 botones">
+                <form class="form">
+                    <input class="usuario" type="text" id="txtUsuario" placeholder=" ">
+                    <label for="txtUsuario" class="labelUsuario">Usuario</label>
+                    <span class="lineUsuario"></span>
+                </form>
+                <button type="button" class="btn" id="btnCrear">Crear Partida</button>
+                <h1 class="titulo2">Ingresa Un Codigo Para Unirte A Una Sala</h1>
+                <form class="form">
+                    <input class="unirse" type="text" id="txtUnirse" placeholder=" ">
+                    <label for="txtUnirse" class="label">Ingresar Codigo</label>
+                    <span class="line"></span>
+                </form>
+                <button type="button" class="btn" id="btnUnirse">Unirse A La Partida</button>
+            </div>
+            
         </div>
-
-        <div class="col-sm-6 panelBotones">
-            <input type="button" id="crear" value="Crear Partida">
-            <h1 class="">Unirse A Una Partida</h1>
-            <input type="text" id="txtUnirPartida" placeholder="Ingresar Codigo De Sala">
-
-        </div>
-
-        <div class="col-sm"></div>
-    </div>
     </div>
 
 </body>

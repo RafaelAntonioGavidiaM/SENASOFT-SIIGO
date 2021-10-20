@@ -22,6 +22,14 @@ class crearJuego{
 
     }
 
+    public function ctrlUnirsePartida(){
+
+        $objRespuesta=modeloJuego::unirmePartida($this->codigo,$this->usuario);
+        echo json_encode($objRespuesta);
+
+
+    }
+
 
 
 
@@ -44,8 +52,11 @@ if(isset($_POST["nombreUsuario"]) && isset($_POST["codigo"])){
 
 
 }
-if(isset($_POST["cargarDatosTabla"])){
+if(isset($_POST["usuarioU"]) && isset($_POST["codigoUnion"])){
 
+    $objJuego->codigo=$_POST["codigoUnion"];
+    $objJuego->usuario=$_POST["usuarioU"];
+    $objJuego->ctrlUnirsePartida();
 
 
 }

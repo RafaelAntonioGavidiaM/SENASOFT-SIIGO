@@ -22,14 +22,8 @@ class modeloJuego{
 
         if($objIngreso->execute()){
 
-            $objIngreso= conexion::conectar()->prepare("SELECT idPartida from partida where codigoPartida=:c");
-            $objIngreso->bindParam(":c",$codigo,PDO::PARAM_STR);
-            $objIngreso->execute();
-            $idPartida=$objIngreso->fetch();
-
-            $id=$idPartida[0];
+            $id=modeloJuego::buscarIdPartida($codigo);
             $_SESSION["idPartida"]=$id;
-
 
 
 
@@ -43,15 +37,40 @@ class modeloJuego{
         return $registro;
 
 
+    }
+
+    public static function buscarIdPartida($codigoPartida){
+        $objIngreso= conexion::conectar()->prepare("SELECT idPartida from partida where codigoPartida=:c");
+            $objIngreso->bindParam(":c",$codigoPartida,PDO::PARAM_STR);
+            $objIngreso->execute();
+            $idPartida=$objIngreso->fetch();
+
+            $id=$idPartida[0];
+
+            return $id;
+            
 
 
 
-    
+    } 
+
+    public static function unirmePartida($codigo,$usuario){
+
+        $idPartida=modeloJuego::buscarIdPartida($codigo);
 
 
+        $respuesta=modeloJuego::IngresarNombredeUsuario($usuario,$idPartida);
 
+        session_start();
 
+        
 
+       
+        $_SESSION["usuario"]=$usuario;
+        $_SESSION["partida"]=$codigo;
+        $_SESSION["idPartida"]=$idPartida;
+
+        return $respuesta;
 
 
     }
@@ -68,17 +87,34 @@ class modeloJuego{
 
         if($objInsertarUsuario->execute()){
 
-            $mensaje="Partida Creada";
+           $mensaje =modeloJuego::buscaridJugador($usuario,$codPartida);
 
 
 
         }else{
 
-            $mensaje="No se ha podido crear partida";
+            $mensaje="Problema al ingresar a la partida";
         }
 
         return $mensaje;
 
+
+    }
+
+    public static function buscaridJugador($usuario,$codigoPartida)
+    {
+       // $id=modeloJuego::buscarIdPartida($codigoPartida);
+
+        $objConsultarid=conexion::conectar()->prepare("SELECT idusuario from usuariopartida where nombre  = :n and idpartida = :p");
+        $objConsultarid->bindParam(":n", $usuario,PDO::PARAM_STR);
+        $objConsultarid->bindParam(":p", $codigoPartida,PDO::PARAM_INT);
+        $objConsultarid->execute();
+        $idUsuarioPartida=$objConsultarid->fetch();
+        $usuario=$idUsuarioPartida[0];
+
+        return $usuario;
+
+        
 
     }
 

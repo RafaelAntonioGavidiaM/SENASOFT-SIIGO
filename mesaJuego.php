@@ -11,6 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
   <script src="vista/js/juegoCrear.js"></script>
+  <script src="vista/js/juegoEnEspera.js"></script>
   <script src="vista/js/juegoEnProceso.js"></script>
 </head>
 
@@ -20,16 +21,16 @@
       <div class="contenedor__img">
         <img src="vista/img/jugador1.jpg" class="jugador1__img" alt="" />
       </div>
-      <h1 class="jugador1__nombre">pedro</h1>
+      <h1 class="jugador1__nombre" id="jugador1">Espera..</h1>
     </div>
     <div class="jugador2">
-      <h1 class="jugador2__nombre">pablo</h1>
+      <h1 class="jugador2__nombre" id="jugador2">Espera..</h1>
       <div class="contenedor__img">
         <img src="vista/img/jugador1.jpg" class="jugador2__img" alt="" />
       </div>
     </div>
     <div class="jugador3">
-      <h1 class="jugador3__nombre">edisson</h1>
+      <h1 class="jugador3__nombre" id="jugador3">Espera..</h1>
       <div class="contenedor__img">
         <img src="vista/img/jugador1.jpg" class="jugador3__img" alt="" />
       </div>
@@ -38,7 +39,7 @@
       <div class="contenedor__img">
         <img src="vista/img/jugador1.jpg" class="jugador4__img" alt="" />
       </div>
-      <h1 class="jugador4__nombre">rafa</h1>
+      <h1 class="jugador4__nombre" id="jugador4">Espera..</h1>
     </div>
     <h1 id="mesaNumero" class="mesaNumero">
       MESA N°
@@ -46,6 +47,7 @@
       session_start();
       $codigo = $_SESSION["partida"];
       echo $codigo;
+      
       ?>
     </h1>
     <input class="btnComenzar" type="button" value="Comenzar Partida" />
@@ -89,6 +91,8 @@
 
 <!-- CONTENEDOR CARTAS USUARIO -->
 
+    <div id="mostrarBoton"></div>
+    
     <div class="col-sm-12 contenedorCartas">
       <h1 class="btnMostrarCartas">Mostrar Cartas</h1>
       <h1 class="btnOcultarCartas">Ocultar Cartas</h1>

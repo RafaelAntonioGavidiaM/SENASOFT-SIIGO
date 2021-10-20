@@ -40,7 +40,53 @@ $(document).ready(function() {
 
     }
 
+    $("#btnUnirse").click(function(){
+        
+        var usuario = $("#txtUsuario").val();
+        var unirse =$("#txtUnirse").val();
 
+        var objData = new FormData();
+
+        objData.append("usuarioU",usuario);
+        objData.append("codigoUnion",unirse);
+
+        $.ajax({
+            url: "control/juegoCrearControl.php",
+            type: "post",
+            dataType: "json",
+            data: objData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(respuesta) {
+           
+
+                
+                socket.emit('recargarUsuario', unirse);
+
+                window.location.replace("mesaJuego.php?usuario="+respuesta+"");
+
+
+               
+
+                
+                
+
+
+            }
+
+
+
+        }
+
+    )
+
+
+
+
+    })
+
+    
 
 
 
@@ -76,10 +122,14 @@ $(document).ready(function() {
                     alert(respuesta);
 
 
-                    cargarMesa();
-                    socket.emit('variable', valorCodigo);
+                    
 
-                    window.location.replace("mesaJuego.php");
+                    
+
+                
+                    
+
+                    window.location.replace("mesaJuego.php?usuario="+respuesta+"");
 
 
 

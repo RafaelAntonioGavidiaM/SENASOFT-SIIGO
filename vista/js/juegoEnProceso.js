@@ -1,5 +1,12 @@
 // Rafael
 $(document).ready(function () {
+
+    const valores = window.location.search;
+    const urlParams = new URLSearchParams(valores);
+
+    var usuarioLocal = urlParams.get('usuario');
+    var idPartida = urlParams.get('id');
+    var codigo = urlParams.get('cod');
     $(".btnOcultarCartas").hide();
     $(".contenedorCartas").hide();
     $(".contenedor__revolver").hide();
@@ -46,7 +53,8 @@ $(document).ready(function () {
 
 
 
-        var traerCartas = "ok";
+
+        var traerCartas = idPartida;
 
         var objData = new FormData();
 

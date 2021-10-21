@@ -87,6 +87,50 @@
           <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
         </div>
       </div>
+      <div class="cartaR usu1">
+        <div class="carta__frenteR">
+          <h1 class="titulo__carta__frenteR">SIIGO</h1>
+        </div>
+        <div class="carta__atrasR">
+          <div class="cabecera__cartaR">
+            <img class="imagen__cartaR" src="vista/img/jugador1.jpg" alt="">
+          </div>
+          <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
+        </div>
+      </div>
+      <div class="cartaR usu2">
+        <div class="carta__frenteR">
+          <h1 class="titulo__carta__frenteR">SIIGO</h1>
+        </div>
+        <div class="carta__atrasR">
+          <div class="cabecera__cartaR">
+            <img class="imagen__cartaR" src="vista/img/jugador1.jpg" alt="">
+          </div>
+          <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
+        </div>
+      </div>
+      <div class="cartaR usu3">
+        <div class="carta__frenteR">
+          <h1 class="titulo__carta__frenteR">SIIGO</h1>
+        </div>
+        <div class="carta__atrasR">
+          <div class="cabecera__cartaR">
+            <img class="imagen__cartaR" src="vista/img/jugador1.jpg" alt="">
+          </div>
+          <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
+        </div>
+      </div>
+      <div class="cartaR usu4">
+        <div class="carta__frenteR">
+          <h1 class="titulo__carta__frenteR">SIIGO</h1>
+        </div>
+        <div class="carta__atrasR">
+          <div class="cabecera__cartaR">
+            <img class="imagen__cartaR" src="vista/img/jugador1.jpg" alt="">
+          </div>
+          <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
+        </div>
+      </div>
     </div>
 
 

@@ -38,7 +38,6 @@ $(document).ready(function() {
 
     $(".btnComenzar").click(function() {
         $(".btnComenzar").hide();
-        $(".contenedorCartas").fadeIn(1000);
         $(".contenedor__revolver").fadeIn(3000);
         setTimeout(function() {
             $(".contenedorRandom").css("top", "0px");
@@ -50,8 +49,13 @@ $(document).ready(function() {
         $(".primera").addClass('s1');
         $(".segunda").addClass('s2');
         $(".tercera").addClass('s3');
+        $(".usu1").addClass('u1');
+        $(".usu2").addClass('u2');
+        $(".usu3").addClass('u3');
+        $(".usu4").addClass('u4');
         $(".contenedorRandom").css("top", "-970px");
         $(".contenedorRandom").css("transition", "top 1s ease-in-out");
+        $(".contenedorCartas").fadeIn(6500);
     });
 
     // Edisson

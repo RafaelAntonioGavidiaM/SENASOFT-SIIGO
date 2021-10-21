@@ -47,11 +47,11 @@
       session_start();
       $codigo = $_SESSION["partida"];
       echo $codigo;
-      
+
       ?>
     </h1>
     <div id="mostrarBoton"><input class="btnComenzar" type="button" value="Comenzar Partida" /></div>
-    
+
 
     <div class="contenedor__revolver">
       <div class="cartaR primera">
@@ -134,10 +134,10 @@
     </div>
 
 
-<!-- CONTENEDOR CARTAS USUARIO -->
+    <!-- CONTENEDOR CARTAS USUARIO -->
 
     <div id="mostrarBoton"></div>
-    
+
     <div class="col-sm-12 contenedorCartas">
       <h1 class="btnMostrarCartas">Mostrar Cartas</h1>
       <h1 class="btnOcultarCartas">Ocultar Cartas</h1>
@@ -206,7 +206,23 @@
 
 
   <div class="contenedorEspera">
-    <h1 class="tituloEspera">Partida En Espera</h1>
+
+    <div class="container">
+      <div class="contenedorTuloEspera">
+        <h1 class="tituloEspera">Partida En Espera</h1>
+      </div>
+      <center>
+        <h1 id="mesaNumero" style="color: #fff;">
+          MESA N°
+          <?php
+          // session_start();
+          $codigo = $_SESSION["partida"];
+          echo $codigo;
+
+          ?>
+        </h1>
+      </center>
+    </div>
   </div>
 </body>
 

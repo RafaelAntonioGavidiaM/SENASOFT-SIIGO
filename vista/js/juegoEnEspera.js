@@ -1,20 +1,21 @@
 // Rafael
-$(document).ready(function () {
+$(document).ready(function() {
 
 
 
- const valores =  window.location.search;
- const urlParams = new URLSearchParams(valores);
+    const valores = window.location.search;
+    const urlParams = new URLSearchParams(valores);
 
- var usuarioLocal=urlParams.get('usuario');
- console.log(usuarioLocal);
+    var usuarioLocal = urlParams.get('usuario');
+    console.log(usuarioLocal);
 
 
- console.log(valores);
+    console.log(valores);
 
+    $("#mostrarBoton").hide();
 
     var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
-    socket.on('recargarUsuario', function (variable) {
+    socket.on('recargarUsuario', function(variable) {
 
 
         validarUnion(variable);
@@ -46,7 +47,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (respuesta) {
+            success: function(respuesta) {
                 console.log(respuesta);
 
 
@@ -56,16 +57,16 @@ $(document).ready(function () {
 
                     if (index == 0) {
                         $("#jugador1").html(respuesta[index]["nombre"]);
-                        console.log(usuarioLocal+" "+respuesta[index]["idUsuario"]);
+                        console.log(usuarioLocal + " " + respuesta[index]["idUsuario"]);
                         $(".contenedorEspera").css("display", "block");
-                        if(usuarioLocal==respuesta[index]["idUsuario"]){
-                           // $(".contenedorEspera").css("display", "none");
-                            var boton ='<input class="btnComenzar" type="button" value="comenzar Partida"/>';
+                        if (usuarioLocal == respuesta[index]["idUsuario"]) {
+                            // $(".contenedorEspera").css("display", "none");
 
-                            $("#mostrarBoton").html(boton);
+
+                            $("#mostrarBoton").show();
 
                         }
-                        
+
 
 
 
@@ -133,7 +134,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (respuesta) {
+            success: function(respuesta) {
 
 
                 console.log(respuesta);
@@ -146,11 +147,11 @@ $(document).ready(function () {
                 for (let index = 0; index < respuesta.length; index++) {
 
                     if (index == 0) {
-                        console.log(usuarioLocal+" "+respuesta[index]["idUsuario"]);
+                        console.log(usuarioLocal + " " + respuesta[index]["idUsuario"]);
                         $("#jugador1").html(respuesta[index]["nombre"]);
-                        
-                        
-                       
+
+
+
 
 
 
@@ -158,27 +159,27 @@ $(document).ready(function () {
                     } else if (index == 1) {
                         $("#jugador2").html(respuesta[index]["nombre"]);
                         $(".contenedorEspera").css("display", "block");
-                      
+
 
 
                     } else if (index == 2) {
                         $("#jugador3").html(respuesta[index]["nombre"]);
                         $(".contenedorEspera").css("display", "block");
-                        
+
 
                     } else if (index == 3) {
                         $("#jugador4").html(respuesta[index]["nombre"]);
                         $(".contenedorEspera").css("display", "block");
-                        if(usuarioLocal==respuesta[0]["idUsuario"]){
+                        if (usuarioLocal == respuesta[0]["idUsuario"]) {
                             $(".contenedorEspera").css("display", "none");
-                           
 
-                           
+
+
 
                         }
 
 
-                        
+
 
 
 
@@ -206,7 +207,9 @@ $(document).ready(function () {
 
     }
 
-    
+
+
+
 
 
 
@@ -219,7 +222,3 @@ $(document).ready(function () {
 
 
 })
-
-
-
-

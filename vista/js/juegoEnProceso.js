@@ -35,6 +35,7 @@ $(document).ready(function() {
         $(".contenedorCartas").css("transform", "translateY(0px)");
         $(".contenedorCartas").css("transition", "transform 1s ease-in-out");
     });
+
     $(".btnComenzar").click(function() {
         $(".btnComenzar").hide();
         $(".contenedorCartas").fadeIn(1000);
@@ -44,6 +45,7 @@ $(document).ready(function() {
             $(".contenedorRandom").css("transition", "top 1s ease-in-out");
         }, 1000);
     });
+
     $(".btnSalirRandom").click(function() {
         $(".primera").addClass('s1');
         $(".segunda").addClass('s2');

@@ -50,7 +50,8 @@
       
       ?>
     </h1>
-    <input class="btnComenzar" type="button" value="Comenzar Partida" />
+    <div id="mostrarBoton"><input class="btnComenzar" type="button" value="Comenzar Partida" /></div>
+    
 
     <div class="contenedor__revolver">
       <div class="cartaR primera">

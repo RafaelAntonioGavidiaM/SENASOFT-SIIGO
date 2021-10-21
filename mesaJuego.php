@@ -136,12 +136,32 @@
               <h4 class="modal-title">Es tu turno ¿quieres preguntar o señalar?</h4>
             </div>
             <div class="modal-body">
-
+              <center>
+                <h2>¿Quieres Preguntar o Señalar?</h2>
+                <p>El programador:
+                  <select id="selectProgramador" class="select" aria-label=".form-select-lg example">
+                    <option selected place>Seleccionar Programador</option>
+                  </select>
+                </p>
+                <br>
+                <p>En el modulo:
+                  <select id="selectModulo" class="select" aria-label=".form-select-lg example">
+                    <option selected place>Seleccionar Modulo</option>
+                  </select>
+                </p>
+                <br>
+                <p>Con el error:
+                  <select id="selectError" class="select" aria-label=".form-select-lg example">
+                    <option selected place>Seleccionar Error</option>
+                  </select>
+                </p>
+              </center>
             </div>
             <div class="modal-footer">
-              <button id="btnPreguntar" type="button" class="btn btn-default" data-dismiss="modal">Preguntar</button>
-              <button id="btnSeñalar" type="button" class="btn btn-default" data-dismiss="modal">Señalar</button>
-              <button type="button" class="btn btn-primary">Cerrar</button>
+              <center>
+                <button id="btnPreguntar" type="button" class="btn btn-default" data-dismiss="modal">Preguntar</button>
+                <button id="btnSeñalar" type="button" class="btn btn-default" data-dismiss="modal">Señalar</button>
+              </center>
             </div>
           </div>
         </div>

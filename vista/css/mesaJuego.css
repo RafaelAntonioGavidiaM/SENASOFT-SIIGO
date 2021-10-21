@@ -489,3 +489,35 @@ body {
     height: 50%;
     border: 1 solid var(--colorPrincipal);
 }
+
+.modal-header,
+.modal-footer {
+    background: var(--colorPrincipal);
+}
+
+.modal-title {
+    color: #fff;
+}
+
+#btnPreguntar,
+#btnSeñalar {
+    background: none;
+    outline: none;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transition: background, color .6s ease;
+}
+
+#btnPreguntar:hover,
+#btnSeñalar:hover {
+    background: #fff;
+    color: var(--colorPrincipal);
+    transition: background, color .6s ease;
+}
+
+.select {
+    width: 500px;
+    height: 30px;
+    outline: none;
+}

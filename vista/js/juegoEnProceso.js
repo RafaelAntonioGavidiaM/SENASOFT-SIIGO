@@ -7,9 +7,96 @@ $(document).ready(function () {
     var usuarioLocal = urlParams.get('usuario');
     var idPartida = urlParams.get('id');
     var codigo = urlParams.get('cod');
+     var usuarios=[];
+
+
+     var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
+    socket.on('turno', function(variable) {
+
+    
+        if(variable==usuarioLocal){
+          
+            $(".contenedorEspera").css("display", "none");
+            $("#modalPregunta").modal(toggle);
+
+
+
+        } else{
+
+            alert("esperanzdo tu truno");
+        }
+
+
+
+
+
+    });
+
+    
+
+
+
+    
     $(".btnOcultarCartas").hide();
     $(".contenedorCartas").hide();
     $(".contenedor__revolver").hide();
+
+    cargarUsuariosEnEjecucion(idPartida);
+
+
+    
+
+
+    function cargarUsuariosEnEjecucion(id) {
+
+
+
+        var cargarUsuarios = id;
+
+        var objData = new FormData();
+
+
+        objData.append("cargarUsuarios", cargarUsuarios);
+
+
+        $.ajax({
+            url: "control/juegoEnEspera.php",
+            type: "post",
+            dataType: "json",
+            data: objData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(respuesta) {
+
+                usuarios=respuesta
+                
+
+
+
+
+                
+
+
+
+                
+
+
+            }
+
+
+
+        })
+
+
+
+
+
+
+
+
+
+    }
 
     function cargarCartas() {
         var listarCartas = "ok";
@@ -72,10 +159,24 @@ $(document).ready(function () {
 
 
 
+
+
+
+
+
+
             }
 
 
         })
+
+        socket.emit('turno', usuarioLocal);
+
+
+
+
+
+
 
 
 

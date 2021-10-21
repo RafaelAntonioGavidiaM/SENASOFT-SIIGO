@@ -99,6 +99,172 @@ $(document).ready(function () {
         }, 4000);
     });
 
+    function cargarComboProgramador(opcion, principal, idCarta) {
+        var cargarProgramador = "ok";
+        var objCargarProgramador = new FormData();
+        objCargarProgramador.append("cargarProgramador", cargarProgramador);
+        $.ajax({
+            url: "control/juegoEnProcesoControl.php",
+            type: "post",
+            dataType: "json",
+            data: objCargarProgramador,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(objRespuesta) {
+                if (opcion == 1) {
+                    $("#selectProgramador").html("");
+                    objRespuesta.forEach(cargarSelectProgramador);
+
+                    function cargarSelectProgramador(item, index) {
+                        $("#selectProgramador").append(
+                            '<option value="' +
+                            item.idCarta +
+                            '">' +
+                            item.nombreCarta +
+                            "</option>"
+                        );
+                    }
+                } else if (opcion == 2) {
+                    var concatenar = "";
+                    objRespuesta.forEach(cargarSelectProgramador);
+
+                    function cargarSelectProgramador(item, index) {
+                        if (item.idCarta == idCarta) {} else {
+                            concatenar +=
+                                '<option value="' +
+                                item.idCarta +
+                                '">' +
+                                item.nombreCarta +
+                                "</option>";
+                        }
+                    }
+                    $("#selectProgramador").html(principal + concatenar);
+                }
+            },
+        });
+    }
+
+    function cargarComboModulo(opcion, principal, idCarta) {
+        var cargarModulo = "ok";
+        var objCargarModulo = new FormData();
+        objCargarModulo.append("cargarModulo", cargarModulo);
+        $.ajax({
+            url: "control/juegoEnProcesoControl.php",
+            type: "post",
+            dataType: "json",
+            data: objCargarModulo,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(objRespuesta) {
+                if (opcion == 1) {
+                    $("#selectModulo").html("");
+                    objRespuesta.forEach(cargarSelectModulo);
+
+                    function cargarSelectModulo(item, index) {
+                        $("#selectModulo").append(
+                            '<option value="' +
+                            item.idCarta +
+                            '">' +
+                            item.nombreCarta +
+                            "</option>"
+                        );
+                    }
+                } else if (opcion == 2) {
+                    var concatenar = "";
+                    objRespuesta.forEach(cargarSelectModulo);
+
+                    function cargarSelectModulo(item, index) {
+                        if (item.idCarta == idCarta) {} else {
+                            concatenar +=
+                                '<option value="' +
+                                item.idCarta +
+                                '">' +
+                                item.nombreCarta +
+                                "</option>";
+                        }
+                    }
+                    $("#selectModulo").html(principal + concatenar);
+                }
+            },
+        });
+    }
+
+    function cargarComboError(opcion, principal, idCarta) {
+        var cargarError = "ok";
+        var objCargarError = new FormData();
+        objCargarError.append("cargarError", cargarError);
+        $.ajax({
+            url: "control/juegoEnProcesoControl.php",
+            type: "post",
+            dataType: "json",
+            data: objCargarError,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(objRespuesta) {
+                if (opcion == 1) {
+                    $("#selectError").html("");
+                    objRespuesta.forEach(cargarSelectError);
+
+                    function cargarSelectError(item, index) {
+                        $("#selectError").append(
+                            '<option value="' +
+                            item.idCarta +
+                            '">' +
+                            item.nombreCarta +
+                            "</option>"
+                        );
+                    }
+                } else if (opcion == 2) {
+                    var concatenar = "";
+                    objRespuesta.forEach(cargarSelectError);
+
+                    function cargarSelectError(item, index) {
+                        if (item.idCarta == idCarta) {} else {
+                            concatenar +=
+                                '<option value="' +
+                                item.idCarta +
+                                '">' +
+                                item.nombreCarta +
+                                "</option>";
+                        }
+                    }
+                    $("#selectError").html(principal + concatenar);
+                }
+            },
+        });
+    }
+    $("#btnPreguntar").click(function() {
+        var preguntaProgramador = $("#selectProgramador").val();
+        var preguntaModulo = $("#selectModulo").val();
+        var preguntaError = $("#selectError").val();
+        alert("PROGRAMADOR: " + preguntaProgramador + " " + "MODULO: " + preguntaModulo + " " + "ERROR: " + preguntaError)
+
+        var objEnviarPreguntas = new FormData();
+        objEnviarPreguntas.append("preguntaProgramador", preguntaProgramador);
+        objEnviarPreguntas.append("preguntaModulo", preguntaModulo);
+        objEnviarPreguntas.append("preguntaError", preguntaError);
+
+        $.ajax({
+            url: "control/juegoEnProcesoControl.php",
+            type: "post",
+            dataType: "json",
+            data: objEnviarPreguntas,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(respuesta) {
+                if (respuesta == "ok") {
+                    alert("pregunta enviada");
+                } else {
+                    alert("No se pudo enviar la pregunta");
+                }
+            },
+        });
+    });
+
 
     // Edisson
 

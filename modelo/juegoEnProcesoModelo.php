@@ -215,4 +215,51 @@ class modeloJuego
 
         return $cartaJugador;
     }
+
+
+    public static function mdlListarCartasProgramador()
+    {
+        $objRespuesta = Conexion::conectar()->prepare("SELECT idCarta, nombreCarta FROM carta where idTipo=1");
+        $objRespuesta->execute();
+        $listarProgramadores = $objRespuesta->fetchAll();
+        $objRespuesta = null;
+        return $listarProgramadores;
+    }
+    public static function mdlListarCartasModulo()
+    {
+        $objRespuesta = Conexion::conectar()->prepare("SELECT idCarta, nombreCarta FROM carta where idTipo=2");
+        $objRespuesta->execute();
+        $listarProgramadores = $objRespuesta->fetchAll();
+        $objRespuesta = null;
+        return $listarProgramadores;
+    }
+    public static function mdlListarCartasError()
+    {
+        $objRespuesta = Conexion::conectar()->prepare("SELECT idCarta, nombreCarta FROM carta where idTipo=3");
+        $objRespuesta->execute();
+        $listarProgramadores = $objRespuesta->fetchAll();
+        $objRespuesta = null;
+        return $listarProgramadores;
+    }
+    public static function mdlEnviarPregunta($preguntaProgramador,$preguntaModulo,$preguntaError)
+    {
+        $mensaje = "";
+        try {
+            $objRespuesta = Conexion::conectar()->prepare("INSERT INTO pregunta(preguntaProgramador,preguntaModulo,preguntaError)VALUES(:preguntaProgramador,:preguntaModulo,:preguntaError)");
+            $objRespuesta->bindParam(":preguntaProgramador", $preguntaProgramador, PDO::PARAM_STR);
+            $objRespuesta->bindParam(":preguntaModulo", $preguntaModulo, PDO::PARAM_STR);
+            $objRespuesta->bindParam(":preguntaError", $preguntaError, PDO::PARAM_STR);
+            if ($objRespuesta->execute()) {
+                $mensaje = "ok";
+            } else {
+                $mensaje = "error";
+            }
+            $objRespuesta = null;
+        } catch (Exception $e) {
+            $mensaje = $e;
+        }
+
+        return $mensaje;
+    }
+
 }

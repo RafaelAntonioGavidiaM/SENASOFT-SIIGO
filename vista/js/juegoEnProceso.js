@@ -1,5 +1,4 @@
 // Rafael
-<<<<<<< HEAD
 $(document).ready(function () {
 
     const valores = window.location.search;
@@ -8,9 +7,6 @@ $(document).ready(function () {
     var usuarioLocal = urlParams.get('usuario');
     var idPartida = urlParams.get('id');
     var codigo = urlParams.get('cod');
-=======
-$(document).ready(function() {
->>>>>>> 39f6a84f07302164fe4ba69f0563b161168a2001
     $(".btnOcultarCartas").hide();
     $(".contenedorCartas").hide();
     $(".contenedor__revolver").hide();
@@ -58,12 +54,7 @@ $(document).ready(function() {
 
 
 
-<<<<<<< HEAD
         var traerCartas = idPartida;
-=======
-
-        var traerCartas = "ok";
->>>>>>> 39f6a84f07302164fe4ba69f0563b161168a2001
 
         var objData = new FormData();
 

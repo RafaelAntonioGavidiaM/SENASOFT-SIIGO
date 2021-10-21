@@ -64,12 +64,27 @@ $(document).ready(function() {
                     var usuario = respuesta[1];
                     var codPartida = respuesta[2];
 
-                    var concatenar = idPartida + "," + codPartida;
+                  
+                    if (respuesta != "sala llena") {
+                        socket.emit('recargarUsuario', codPartida);
+                        window.location.replace("mesaJuego.php?usuario=" + usuario + "&id=" + idPartida + "&cod=" + codPartida + "");
+                    } else {
+    
+    
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'la partida ya esta llena',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+    
+                    }
 
 
-                    socket.emit('recargarUsuario', codPartida);
+                    
 
-                    window.location.replace("mesaJuego.php?usuario=" + usuario + "&id=" + idPartida + "&cod=" + codPartida + "");
+                    
 
 
 

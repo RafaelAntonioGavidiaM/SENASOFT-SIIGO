@@ -13,6 +13,7 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="vista/js/juegoCrear.js"></script>
   <script src="vista/js/juegoEnEspera.js"></script>
+  <script src="vista/js/juegoFinalizado.js"></script>
   <script src="vista/js/juegoEnProceso.js"></script>
 </head>
 
@@ -159,8 +160,8 @@
             </div>
             <div class="modal-footer">
               <center>
-                <button id="btnPreguntar" type="button" class="btn btn-default" data-dismiss="modal">Preguntar</button>
-                <button id="btnSeñalar" type="button" class="btn btn-default" data-dismiss="modal">Señalar</button>
+                <button id="btnPreguntar" type="button" idSiguiente="" class="btn btn-default" data-dismiss="modal">Preguntar</button>
+                <button id="btnSeñalar" type="button" idSiguiente="" class="btn btn-default" data-dismiss="modal">Señalar</button>
               </center>
             </div>
           </div>

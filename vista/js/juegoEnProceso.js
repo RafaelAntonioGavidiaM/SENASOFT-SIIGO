@@ -7,21 +7,75 @@ $(document).ready(function () {
     var usuarioLocal = urlParams.get('usuario');
     var idPartida = urlParams.get('id');
     var codigo = urlParams.get('cod');
-     var usuarios=[];
+    var usuarios = [];
 
 
-     var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
-    socket.on('turno', function(variable) {
+    var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
 
-    
-        if(variable==usuarioLocal){
-          
-            $(".contenedorEspera").css("display", "none");
-            $("#modalPregunta").modal(toggle);
+    socket.on('recargarUsuario', function(variable) {
+
+        console.log(variable);
 
 
+        if (variable == codigo) {
+            cargarUsuariosEnEjecucion(idPartida);
+            
 
-        } else{
+        }
+
+
+
+
+
+    });
+
+    socket.on('gano', function(variable) {
+
+       
+        
+
+        
+            alert("Ya hay un Ganador");
+            window.location.replace("index.html");
+
+        
+
+
+        
+
+
+
+
+    });
+
+
+
+
+   
+    socket.on('turno', function (variable) {
+
+
+        var valores=variable.split(",");
+
+        //alert(valores[0]+" "+ valores[1]);
+
+
+
+
+
+        if (valores[1] == usuarioLocal && valores[0]==idPartida) {
+
+
+            setTimeout(function () {
+                cargarComboError(1);
+                cargarComboModulo(1);
+                cargarComboProgramador(1);
+                $('#modalPregunta').modal('toggle');
+
+            }, 8000);
+
+
+        } else if(valores[0]==idPartida) {
 
             alert("esperanzdo tu truno");
         }
@@ -32,11 +86,13 @@ $(document).ready(function () {
 
     });
 
-    
 
 
 
-    
+
+
+
+
     $(".btnOcultarCartas").hide();
     $(".contenedorCartas").hide();
     $(".contenedor__revolver").hide();
@@ -44,7 +100,7 @@ $(document).ready(function () {
     cargarUsuariosEnEjecucion(idPartida);
 
 
-    
+
 
 
     function cargarUsuariosEnEjecucion(id) {
@@ -67,19 +123,66 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {
+            success: function (respuesta) {
 
-                usuarios=respuesta
-                
-
-
-
+                console.log(respuesta);
 
                 
 
+                var siguienteUsuario = "";
+                var contador = 0;
+                respuesta.forEach(cargarSiguiente);
 
+
+
+                function cargarSiguiente(item, index) {
+
+                    numeroJugadorLocal = Number(usuarioLocal);
+                    numeroJugador = Number(item.idUsuario);
+
+
+
+                    if (numeroJugadorLocal == numeroJugador) {
+
+                        contador = index;
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+                }
 
                 
+                if (contador + 1 != 4) {
+                    $("#btnPreguntar").attr("idSiguiente", respuesta[contador+1][0]);
+                    $("#btnSeñalar").attr("idSiguiente", respuesta[contador+1][0]);
+
+
+
+                } else {
+                    $("#btnPreguntar").attr("idSiguiente", respuesta[0][0]);
+                    $("#btnSeñalar").attr("idSiguiente", respuesta[0][0]);
+
+
+
+                }
+
+
+
+
+
+
+
+
+
 
 
             }
@@ -111,29 +214,29 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {},
+            success: function (respuesta) { },
         });
     }
 
     // Diego
 
-    $(".btnMostrarCartas").click(function() {
+    $(".btnMostrarCartas").click(function () {
         $(".btnOcultarCartas").show();
         $(".btnMostrarCartas").hide();
         $(".contenedorCartas").css("transform", "translateY(-330px)");
         $(".contenedorCartas").css("transition", "transform 1s ease-in-out");
     });
-    $(".btnOcultarCartas").click(function() {
+    $(".btnOcultarCartas").click(function () {
         $(".btnOcultarCartas").hide();
         $(".btnMostrarCartas").show();
         $(".contenedorCartas").css("transform", "translateY(0px)");
         $(".contenedorCartas").css("transition", "transform 1s ease-in-out");
     });
 
-    $(".btnComenzar").click(function() {
+    $(".btnComenzar").click(function () {
         $(".btnComenzar").hide();
         $(".contenedor__revolver").fadeIn(3000);
-        setTimeout(function() {
+        setTimeout(function () {
             $(".contenedorRandom").css("top", "0px");
             $(".contenedorRandom").css("transition", "top 1s ease-in-out");
         }, 1000);
@@ -155,7 +258,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {
+            success: function (respuesta) {
 
 
 
@@ -170,7 +273,9 @@ $(document).ready(function () {
 
         })
 
-        socket.emit('turno', usuarioLocal);
+        var enviar=idPartida+","+usuarioLocal;
+
+        socket.emit('turno', enviar);
 
 
 
@@ -184,7 +289,7 @@ $(document).ready(function () {
 
     });
 
-    $(".btnSalirRandom").click(function() {
+    $(".btnSalirRandom").click(function () {
         $(".primera").addClass('s1');
         $(".segunda").addClass('s2');
         $(".tercera").addClass('s3');
@@ -195,9 +300,7 @@ $(document).ready(function () {
         $(".contenedorRandom").css("top", "-970px");
         $(".contenedorRandom").css("transition", "top 1s ease-in-out");
         $(".contenedorCartas").fadeIn(6500);
-        setTimeout(function() {
-            $('#modalPregunta').modal('toggle');
-        }, 4000);
+
     });
 
     function cargarComboProgramador(opcion, principal, idCarta) {
@@ -212,7 +315,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(objRespuesta) {
+            success: function (objRespuesta) {
                 if (opcion == 1) {
                     $("#selectProgramador").html("");
                     objRespuesta.forEach(cargarSelectProgramador);
@@ -231,7 +334,7 @@ $(document).ready(function () {
                     objRespuesta.forEach(cargarSelectProgramador);
 
                     function cargarSelectProgramador(item, index) {
-                        if (item.idCarta == idCarta) {} else {
+                        if (item.idCarta == idCarta) { } else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -258,7 +361,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(objRespuesta) {
+            success: function (objRespuesta) {
                 if (opcion == 1) {
                     $("#selectModulo").html("");
                     objRespuesta.forEach(cargarSelectModulo);
@@ -277,7 +380,7 @@ $(document).ready(function () {
                     objRespuesta.forEach(cargarSelectModulo);
 
                     function cargarSelectModulo(item, index) {
-                        if (item.idCarta == idCarta) {} else {
+                        if (item.idCarta == idCarta) { } else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -304,7 +407,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(objRespuesta) {
+            success: function (objRespuesta) {
                 if (opcion == 1) {
                     $("#selectError").html("");
                     objRespuesta.forEach(cargarSelectError);
@@ -323,7 +426,7 @@ $(document).ready(function () {
                     objRespuesta.forEach(cargarSelectError);
 
                     function cargarSelectError(item, index) {
-                        if (item.idCarta == idCarta) {} else {
+                        if (item.idCarta == idCarta) { } else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -337,7 +440,7 @@ $(document).ready(function () {
             },
         });
     }
-    $("#btnPreguntar").click(function() {
+    $("#btnPreguntar").click(function () {
         var preguntaProgramador = $("#selectProgramador").val();
         var preguntaModulo = $("#selectModulo").val();
         var preguntaError = $("#selectError").val();
@@ -347,6 +450,7 @@ $(document).ready(function () {
         objEnviarPreguntas.append("preguntaProgramador", preguntaProgramador);
         objEnviarPreguntas.append("preguntaModulo", preguntaModulo);
         objEnviarPreguntas.append("preguntaError", preguntaError);
+        objEnviarPreguntas.append("idUsuario",usuarioLocal);
 
         $.ajax({
             url: "control/juegoEnProcesoControl.php",
@@ -356,7 +460,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {
+            success: function (respuesta) {
                 if (respuesta == "ok") {
                     alert("pregunta enviada");
                 } else {
@@ -365,6 +469,9 @@ $(document).ready(function () {
             },
         });
     });
+
+
+   
 
 
     // Edisson

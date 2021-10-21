@@ -43,8 +43,8 @@
       <h1 class="jugador4__nombre" id="jugador4">Espera..</h1>
     </div>
     <h1 id="mesaNumero" class="mesaNumero">
-      
-     
+
+
     </h1>
     <div id="mostrarBoton"><input class="btnComenzar" type="button" value="Comenzar Partida" /></div>
 
@@ -126,6 +126,27 @@
           </div>
           <h1 class="titulo__carta__atrasR">Nombre Carta</h1>
         </div>
+      </div>
+
+      <div class="modal fade" id="modalPregunta">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Es tu turno ¿quieres preguntar o señalar?</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+              <button id="btnPreguntar" type="button" class="btn btn-default" data-dismiss="modal">Preguntar</button>
+              <button id="btnSeñalar" type="button" class="btn btn-default" data-dismiss="modal">Señalar</button>
+              <button type="button" class="btn btn-primary">Cerrar</button>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
 
@@ -209,7 +230,7 @@
       </div>
       <center>
         <h1 id="mesaNumeroEspera" style="color: #fff;">
-         Mesa N° 
+          Mesa N°
         </h1>
       </center>
     </div>

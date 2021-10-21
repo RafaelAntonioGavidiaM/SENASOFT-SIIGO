@@ -207,14 +207,8 @@
         <h1 class="tituloEspera">Partida En Espera</h1>
       </div>
       <center>
-        <h1 id="mesaNumero" style="color: #fff;">
-          MESA N°
-          <?php
-          // session_start();
-          $codigo = $_SESSION["partida"];
-          echo $codigo;
-
-          ?>
+        <h1 id="mesaNumeroEspera" style="color: #fff;">
+         Mesa N° 
         </h1>
       </center>
     </div>

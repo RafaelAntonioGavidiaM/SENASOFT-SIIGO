@@ -4,10 +4,11 @@ include_once "../modelo/juegoEnEsperaModelo.php";
 class esperaControl{
 
     public $codigoPartida;
+    public $idPartida;
 
 public function cargarUsuarios(){
 
-    $objRespuesta= modeloEspero::mdlCargarUsuarios();
+    $objRespuesta= modeloEspero::mdlCargarUsuarios($this->idPartida);
     echo json_encode($objRespuesta);
 
 
@@ -20,8 +21,9 @@ public function cargarUsuarios(){
 $objEspera = new esperaControl();
 
 if(isset($_POST["cargarUsuarios"])){
-    session_start();
+    
 
+    $objEspera->idPartida=$_POST["cargarUsuarios"];
     $objEspera->cargarUsuarios();
 
 

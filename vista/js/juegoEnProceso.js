@@ -44,6 +44,36 @@ $(document).ready(function() {
             $(".contenedorRandom").css("top", "0px");
             $(".contenedorRandom").css("transition", "top 1s ease-in-out");
         }, 1000);
+
+
+
+        var traerCartas = "ok";
+
+        var objData = new FormData();
+
+        objData.append("traerCartas", traerCartas);
+
+        $.ajax({
+            url: "control/juegoEnProcesoControl.php",
+            type: "post",
+            dataType: "json",
+            data: objData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(respuesta) {
+
+
+
+            }
+
+
+        })
+
+
+
+
+
     });
 
     $(".btnSalirRandom").click(function() {

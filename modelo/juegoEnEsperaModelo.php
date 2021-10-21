@@ -4,10 +4,10 @@ require "conexion.php";
 class modeloEspero{
 
 
-    public static function mdlCargarUsuarios(){
+    public static function mdlCargarUsuarios($idPartida){
        // session_start();
 
-        $idPartida=$_SESSION["idPartida"];
+      
 
         $objConsulta =conexion::conectar()->prepare("SELECT * FROM usuarioPartida where idPartida=:id");
 

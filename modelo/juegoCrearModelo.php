@@ -5,9 +5,9 @@ class modeloJuego{
 
     public static function mdlCrearJuego($usuario,$codigo){
 
-        session_start();
+        
 
-        $registro="";
+        $variables=[];
 
        
         $_SESSION["usuario"]=$usuario;
@@ -23,18 +23,23 @@ class modeloJuego{
         if($objIngreso->execute()){
 
             $id=modeloJuego::buscarIdPartida($codigo);
-            $_SESSION["idPartida"]=$id;
+            //$_SESSION["idPartida"]=$id;
+
+           
+            $variables[0]=$id;
 
 
 
           
             $registro = modeloJuego::IngresarNombredeUsuario($usuario,$id);
+            $variables[1]=$registro;
+            $variables[2]=$codigo;
 
 
 
         }
 
-        return $registro;
+        return  $variables;
 
 
     }
@@ -61,16 +66,12 @@ class modeloJuego{
 
         $respuesta=modeloJuego::IngresarNombredeUsuario($usuario,$idPartida);
 
-        session_start();
+        $variable=[];
+        $variable[0]=$idPartida;
+        $variable[1]=$respuesta;
+        $variable[2]=$codigo;
 
-        
-
-       
-        $_SESSION["usuario"]=$usuario;
-        $_SESSION["partida"]=$codigo;
-        $_SESSION["idPartida"]=$idPartida;
-
-        return $respuesta;
+        return $variable;
 
 
     }

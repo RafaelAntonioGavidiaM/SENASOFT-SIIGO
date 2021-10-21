@@ -42,13 +42,8 @@
       <h1 class="jugador4__nombre" id="jugador4">Espera..</h1>
     </div>
     <h1 id="mesaNumero" class="mesaNumero">
-      MESA N°
-      <?php
-      session_start();
-      $codigo = $_SESSION["partida"];
-      echo $codigo;
       
-      ?>
+     
     </h1>
     <div id="mostrarBoton"><input class="btnComenzar" type="button" value="Comenzar Partida" /></div>
     

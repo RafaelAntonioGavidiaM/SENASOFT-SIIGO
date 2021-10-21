@@ -1,6 +1,6 @@
 // Rafael
 $(document).ready(function() {
-    var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
+    var socket = io.connect("http://192.168.0.104:3000", { transports: ['websocket'] });
     socket.on('variable', function(variable) {
 
         console.log(variable);
@@ -40,53 +40,58 @@ $(document).ready(function() {
 
     }
 
-    $("#btnUnirse").click(function(){
-        
+    $("#btnUnirse").click(function() {
+
         var usuario = $("#txtUsuario").val();
-        var unirse =$("#txtUnirse").val();
+        var unirse = $("#txtUnirse").val();
 
         var objData = new FormData();
 
-        objData.append("usuarioU",usuario);
-        objData.append("codigoUnion",unirse);
+        objData.append("usuarioU", usuario);
+        objData.append("codigoUnion", unirse);
 
         $.ajax({
-            url: "control/juegoCrearControl.php",
-            type: "post",
-            dataType: "json",
-            data: objData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(respuesta) {
-           
+                url: "control/juegoCrearControl.php",
+                type: "post",
+                dataType: "json",
+                data: objData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(respuesta) {
 
-                
-                socket.emit('recargarUsuario', unirse);
+                    var idPartida = respuesta[0];
+                    var usuario = respuesta[1];
+                    var codPartida = respuesta[2];
 
-                window.location.replace("mesaJuego.php?usuario="+respuesta+"");
+                    var concatenar = idPartida + "," + codPartida;
 
 
-               
+                    socket.emit('recargarUsuario', codPartida);
 
-                
-                
+                    window.location.replace("mesaJuego.php?usuario=" + usuario + "&id=" + idPartida + "&cod=" + codPartida + "");
+
+
+
+
+
+
+
+
+                }
+
 
 
             }
 
-
-
-        }
-
-    )
+        )
 
 
 
 
     })
 
-    
+
 
 
 
@@ -122,14 +127,20 @@ $(document).ready(function() {
                     alert(respuesta);
 
 
-                    
+                    var idPartida = respuesta[0];
+                    var usuario = respuesta[1];
+                    var codPartida = respuesta[2];
 
-                    
 
-                
-                    
 
-                    window.location.replace("mesaJuego.php?usuario="+respuesta+"");
+
+
+
+
+
+
+
+                    window.location.replace("mesaJuego.php?usuario=" + usuario + "&id=" + idPartida + "&cod=" + codPartida + "");
 
 
 

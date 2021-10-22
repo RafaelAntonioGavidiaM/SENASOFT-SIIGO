@@ -8,11 +8,12 @@ $(document).ready(function() {
     var codigo = urlParams.get("cod");
     var usuarios = [];
 
-    var socket = io.connect("http://localhost:3000", {
-        transports: ["websocket"],
-    });
+    var siguienteJugador = 0;
 
-    socket.on("recargarUsuario", function(variable) {
+    var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
+
+    socket.on('recargarUsuario', function(variable) {
+
         console.log(variable);
 
         if (variable == codigo) {
@@ -20,12 +21,46 @@ $(document).ready(function() {
         }
     });
 
-    socket.on("gano", function(variable) {
-        alert("Ya hay un Ganador");
-        window.location.replace("index.html");
+    socket.on('turno2', function(variable) {
+
+        console.log(variable);
+        alert(variable);
+
+        if (variable == usuarioLocal) {
+            $(".contenedorEspera").css("display", "none");
+            $(".contenedor__revolver").fadeIn(3000);
+            setTimeout(function() {
+                $(".contenedorRandom").css("top", "0px");
+                $(".contenedorRandom").css("transition", "top 1s ease-in-out");
+            }, 1000);
+
+            setTimeout(function() {
+                cargarComboError(1);
+                cargarComboModulo(1);
+                cargarComboProgramador(1);
+                $('#modalPregunta').modal('toggle');
+
+            }, 8000);
+
+        }
+
+
+
+
+
+
+
     });
 
-    socket.on("turno", function(variable) {
+
+
+
+
+    socket.on('turno', function(variable) {
+
+
+
+
         var valores = variable.split(",");
 
         //alert(valores[0]+" "+ valores[1]);
@@ -37,8 +72,11 @@ $(document).ready(function() {
                 cargarComboProgramador(1);
                 $("#modalPregunta").modal("toggle");
             }, 8000);
-        } else if (valores[0] == idPartida) {
-            alert("esperanzdo tu truno");
+
+
+        } else if (variable == "finalizado") {
+
+            window.location.replace("index.html");
         }
     });
 
@@ -82,13 +120,76 @@ $(document).ready(function() {
                 if (contador + 1 != 4) {
                     $("#btnPreguntar").attr("idSiguiente", respuesta[contador + 1][0]);
                     $("#btnSeñalar").attr("idSiguiente", respuesta[contador + 1][0]);
+                    siguienteJugador = respuesta[contador + 1][0];
+
+
+
                 } else {
                     $("#btnPreguntar").attr("idSiguiente", respuesta[0][0]);
                     $("#btnSeñalar").attr("idSiguiente", respuesta[0][0]);
+                    siguienteJugador = respuesta[0][0];
+
+
+
                 }
             },
         });
     }
+
+    $("#btnSeñalar").click(function() {
+
+        var preguntaProgramador = $("#selectProgramador").val();
+        var preguntaModulo = $("#selectModulo").val();
+        var preguntaError = $("#selectError").val();
+        //  alert("PROGRAMADOR: " + preguntaProgramador + " " + "MODULO: " + preguntaModulo + " " + "ERROR: " + preguntaError)
+
+        var objEnviarPreguntas = new FormData();
+        objEnviarPreguntas.append("SpreguntaProgramador", preguntaProgramador);
+        objEnviarPreguntas.append("SpreguntaModulo", preguntaModulo);
+        objEnviarPreguntas.append("SpreguntaError", preguntaError);
+        objEnviarPreguntas.append("SidPartida", idPartida);
+
+        $.ajax({
+            url: "control/juegoEnProcesoControl.php",
+            type: "post",
+            dataType: "json",
+            data: objEnviarPreguntas,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(respuesta) {
+
+                alert(respuesta);
+
+
+
+
+
+                if (respuesta == "Gano") {
+
+                    var finaliza = "finalizado";
+
+                    socket.emit('turno', finaliza);
+
+
+                } else {
+
+
+                    alert(siguienteJugador);
+
+
+                    socket.emit('turno2', siguienteJugador);
+                    $(".contenedorEspera").css("display", "block");
+
+
+
+                }
+
+
+            }
+        });
+
+    })
 
     function cargarCartas() {
         var listarCartas = "ok";

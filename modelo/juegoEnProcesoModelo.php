@@ -264,6 +264,19 @@ class modeloJuego
     }
 
 
+    public static function consultarUltimaPregunta($idPartida){
+
+        $objConsulta=conexion::conectar()->prepare("select idPregunta,pregunta.preguntaProgramador,preguntaModulo,preguntaError from pregunta inner join  usuariopartida on usuariopartida.idUsuario=pregunta.idUsuario inner join carta on carta.idCarta=pregunta.preguntaProgramador where usuariopartida.idPartida=".$idPartida." order by pregunta.idPregunta asc limit 1");
+        $objConsulta->execute();
+        $lista=$objConsulta->fetchAll();
+
+        return $lista;
+
+
+
+    }
+
+
     public static function mdlSenalar($preguntaProgramador,$preguntaModulo,$preguntaError,$idPartida){
 
         $objConsulta= conexion::conectar()->prepare("SELECT cartapartida.idCartaPartida,cartapartida.idCarta,carta.nombreCarta FROM reto.cartapartida  inner join carta on carta.idCarta=cartapartida.idCarta WHERE idPartida=".$idPartida." order by(idTipo)");

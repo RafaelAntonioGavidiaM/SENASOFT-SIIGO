@@ -30,6 +30,37 @@ $(document).ready(function() {
 
     });
 
+    socket.on('pregunta', function (variable) {
+
+        var valores = variable.split(",");
+        var idPartidaPr=valores[0];
+        var idUsuarioPr=valores[1];
+
+        if(idUsuarioPr==usuarioLocal){
+            $(".contenedorEspera").css("display", "none");
+
+            alert("Hola Jugador"+" "+usuarioLocal);
+ 
+
+
+            buscarPregunta(idPartida);
+
+
+
+        }
+
+
+        
+
+
+        
+
+
+
+
+
+    });
+
     socket.on('turno2', function (variable) {
 
         console.log(variable);
@@ -113,6 +144,57 @@ $(document).ready(function() {
     $(".contenedor__revolver").hide();
 
     cargarUsuariosEnEjecucion(idPartida);
+
+
+    function buscarPregunta(idPartida){
+
+       
+
+        var objData= new FormData();
+
+        objData.append("consultarPregunta",idPartida);
+
+        $.ajax({
+
+            url:"control/juegoEnProcesoControl.php",
+            type:"post",
+            dataType:"json",
+            data:objData,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success: function(respuesta){
+
+                console.log(respuesta);
+
+                var cartas =new Array("0","Pedro","Juan","Carlos","Juanita","Antonio","Carolina","Manuel","Nomina","Facturación","Recibos","Comprobante contable","Usuarios","Contabilidad","404","Stack overflow","Memory out of range","Null pointer","Syntax error","Encoding error");
+
+                var error=cartas[parseInt(respuesta[0][3])] ;
+                var programador= cartas[parseInt(respuesta[0][1])];
+                var modulo=cartas[parseInt(respuesta[0][2])];
+
+                
+
+                alert("Error "+" "+error+" Programador "+programador+" Modulo "+ modulo);
+                var pregunta= "Error:  "+" "+error+" Programador: "+programador+" Modulo: "+ modulo +"?";
+
+
+                 $("#preguntaLlega").html(pregunta);
+                $("#modalRespuesta").modal('toggle');
+
+
+
+
+                
+
+
+
+
+            }
+        })
+
+
+    }
 
 
 
@@ -545,7 +627,15 @@ $(document).ready(function() {
             processData: false,
             success: function(respuesta) {
                 if (respuesta == "ok") {
-                    alert("pregunta enviada");
+
+                    var enviaR=idPartida+","+siguienteJugador;
+
+                    socket.emit('pregunta', enviaR);
+
+
+
+                   
+
                 } else {
                     alert("No se pudo enviar la pregunta");
                 }

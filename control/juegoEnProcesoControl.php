@@ -53,6 +53,13 @@ class controlJuegoProceso
         $objRespuesta = modeloJuego::mdlCargarCartaUsuario($this->idPartida, $this->idUsuario);
         echo json_encode($objRespuesta);
     }
+
+    public function ctlrConsultarPregunta(){
+
+        $objRespuesta=modeloJuego::consultarUltimaPregunta($this->idPartida);
+        echo json_encode($objRespuesta);
+
+    }
 }
 
 $objJuegoProceso = new controlJuegoProceso();
@@ -98,4 +105,10 @@ if (isset($_POST["partida"]) && isset($_POST["usuario"])) {
     $objJuegoProceso->idPartida = $_POST["partida"];
     $objJuegoProceso->idUsuario = $_POST["usuario"];
     $objJuegoProceso->crtCargarCartaUsuario();
+}
+if(isset($_POST["consultarPregunta"])){
+
+    $objJuegoProceso->idPartida=$_POST["consultarPregunta"];
+    $objJuegoProceso->ctlrConsultarPregunta();
+
 }

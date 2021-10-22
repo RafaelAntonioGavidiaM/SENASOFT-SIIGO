@@ -36,21 +36,23 @@ class controlJuegoProceso
     }
     public function ctrEnviarPregunta()
     {
-        $objRespuesta = modeloJuego::mdlEnviarPregunta($this->preguntaProgramador, $this->preguntaModulo, $this->preguntaError,$this->idUsuario);
+        $objRespuesta = modeloJuego::mdlEnviarPregunta($this->preguntaProgramador, $this->preguntaModulo, $this->preguntaError, $this->idUsuario);
         echo json_encode($objRespuesta);
     }
 
-    public function ctrlSenalar(){
+    public function ctrlSenalar()
+    {
 
-        $objRespuesta=modeloJuego::mdlSenalar($this->preguntaProgramador, $this->preguntaModulo, $this->preguntaError,$this->idPartida);
+        $objRespuesta = modeloJuego::mdlSenalar($this->preguntaProgramador, $this->preguntaModulo, $this->preguntaError, $this->idPartida);
 
         echo json_encode($objRespuesta);
-
-
     }
+    public function crtCargarCartaUsuario()
+    {
 
-
-
+        $objRespuesta = modeloJuego::mdlCargarCartaUsuario($this->idPartida, $this->idUsuario);
+        echo json_encode($objRespuesta);
+    }
 }
 
 $objJuegoProceso = new controlJuegoProceso();
@@ -58,7 +60,7 @@ $objJuegoProceso = new controlJuegoProceso();
 
 if (isset($_POST["traerCartas"])) {
 
-    $objJuegoProceso->idPartida= $_POST["traerCartas"];
+    $objJuegoProceso->idPartida = $_POST["traerCartas"];
     $objJuegoProceso->traerCartas();
 }
 
@@ -79,7 +81,7 @@ if (isset($_POST["preguntaProgramador"]) &&  isset($_POST["preguntaModulo"]) && 
     $objJuegoProceso->preguntaProgramador = $_POST["preguntaProgramador"];
     $objJuegoProceso->preguntaModulo = $_POST["preguntaModulo"];
     $objJuegoProceso->preguntaError = $_POST["preguntaError"];
-    $objJuegoProceso->idUsuario=$_POST["idUsuario"];
+    $objJuegoProceso->idUsuario = $_POST["idUsuario"];
     $objJuegoProceso->ctrEnviarPregunta();
 }
 if (isset($_POST["SpreguntaProgramador"]) &&  isset($_POST["SpreguntaModulo"]) && isset($_POST["SpreguntaError"]) &&  isset($_POST["SidPartida"])) {
@@ -87,7 +89,13 @@ if (isset($_POST["SpreguntaProgramador"]) &&  isset($_POST["SpreguntaModulo"]) &
     $objJuegoProceso->preguntaProgramador = $_POST["SpreguntaProgramador"];
     $objJuegoProceso->preguntaModulo = $_POST["SpreguntaModulo"];
     $objJuegoProceso->preguntaError = $_POST["SpreguntaError"];
-    $objJuegoProceso->idPartida=$_POST["SidPartida"];
+    $objJuegoProceso->idPartida = $_POST["SidPartida"];
     $objJuegoProceso->ctrlSenalar();
 }
 
+if (isset($_POST["partida"]) && isset($_POST["usuario"])) {
+    $objJuegoProceso = new controlJuegoProceso();
+    $objJuegoProceso->idPartida = $_POST["partida"];
+    $objJuegoProceso->idUsuario = $_POST["usuario"];
+    $objJuegoProceso->crtCargarCartaUsuario();
+}

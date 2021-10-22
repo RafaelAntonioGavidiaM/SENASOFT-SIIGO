@@ -320,5 +320,13 @@ $mensaje="";
 
 
     } 
+    public static function mdlCargarCartaUsuario($idPartida,$idUsuario)
+    {
+        $objRespuesta = Conexion::conectar()->prepare("select carta.idCarta,carta.nombreCarta,carta.imagen from carta inner join cartausuariopartida on carta.idCarta=cartausuariopartida.idCarta where  cartausuariopartida.idUsuario=$idUsuario;");
+        $objRespuesta->execute();
+        $listaCartaUsuario = $objRespuesta->fetchAll();
+        $objRespuesta = null;
+        return $listaCartaUsuario;
+    }
 
 }

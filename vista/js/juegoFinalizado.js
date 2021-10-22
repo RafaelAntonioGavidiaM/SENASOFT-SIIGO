@@ -1,57 +1,23 @@
 // Rafael
 $(document).ready(function(){
 
-    $("#btnSeñalar").click(function(){
+    const valores = window.location.search;
+    const urlParams = new URLSearchParams(valores);
 
-        var preguntaProgramador = $("#selectProgramador").val();
-        var preguntaModulo = $("#selectModulo").val();
-        var preguntaError = $("#selectError").val();
-      //  alert("PROGRAMADOR: " + preguntaProgramador + " " + "MODULO: " + preguntaModulo + " " + "ERROR: " + preguntaError)
-
-        var objEnviarPreguntas = new FormData();
-        objEnviarPreguntas.append("SpreguntaProgramador", preguntaProgramador);
-        objEnviarPreguntas.append("SpreguntaModulo", preguntaModulo);
-        objEnviarPreguntas.append("SpreguntaError", preguntaError);
-        objEnviarPreguntas.append("SidPartida",idPartida);
-
-        $.ajax({
-            url: "control/juegoEnProcesoControl.php",
-            type: "post",
-            dataType: "json",
-            data: objEnviarPreguntas,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (respuesta) {
-
-                alert(respuesta);
+    var usuarioLocal = urlParams.get('usuario');
+    var idPartida = urlParams.get('id');
+    var codigo = urlParams.get('cod');
 
     
 
 
-               
-                if(respuesta=="Gano"){
-
-                    socket.emit('gano ',idPartida );
-
-
-                }else{
-
-                }
-
-
-            }
-        });
 
 
 
 
 
 
-
-
-
-    })
+  
 
 
 

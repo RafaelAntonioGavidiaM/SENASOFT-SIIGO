@@ -1,5 +1,5 @@
 // Rafael
-$(document).ready(function() {
+$(document).ready(function () {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
 
@@ -8,11 +8,13 @@ $(document).ready(function() {
     var codigo = urlParams.get("cod");
     var usuarios = [];
 
+    var idPregunta=0;
+
     var siguienteJugador = 0;
 
     var socket = io.connect("http://localhost:3000", { transports: ['websocket'] });
 
-    socket.on('recargarUsuario', function(variable) {
+    socket.on('recargarUsuario', function (variable) {
 
         console.log(variable);
 
@@ -24,14 +26,17 @@ $(document).ready(function() {
     socket.on('pregunta', function (variable) {
 
         var valores = variable.split(",");
-        var idPartidaPr=valores[0];
-        var idUsuarioPr=valores[1];
+        var idPartidaPr = valores[0];
+        var idUsuarioPr = valores[1];
 
-        if(idUsuarioPr==usuarioLocal){
+        if (idUsuarioPr == usuarioLocal) {
+          
             $(".contenedorEspera").css("display", "none");
+            $(".contenedor__revolver").fadeIn(3000);
+            salir();
 
-            alert("Hola Jugador"+" "+usuarioLocal);
- 
+            alert("Hola Jugador" + " " + usuarioLocal);
+
 
 
             buscarPregunta(idPartida);
@@ -41,10 +46,10 @@ $(document).ready(function() {
         }
 
 
-        
 
 
-        
+
+
 
 
 
@@ -60,12 +65,12 @@ $(document).ready(function() {
         if (variable == usuarioLocal) {
             $(".contenedorEspera").css("display", "none");
             $(".contenedor__revolver").fadeIn(3000);
-            setTimeout(function() {
+            setTimeout(function () {
                 $(".contenedorRandom").css("top", "0px");
                 $(".contenedorRandom").css("transition", "top 1s ease-in-out");
             }, 1000);
 
-            setTimeout(function() {
+            setTimeout(function () {
                 cargarComboError(1);
                 cargarComboModulo(1);
                 cargarComboProgramador(1);
@@ -87,7 +92,7 @@ $(document).ready(function() {
 
 
 
-    socket.on('turno', function(variable) {
+    socket.on('turno', function (variable) {
 
 
 
@@ -97,7 +102,7 @@ $(document).ready(function() {
         //alert(valores[0]+" "+ valores[1]);
 
         if (valores[1] == usuarioLocal && valores[0] == idPartida) {
-            setTimeout(function() {
+            setTimeout(function () {
                 cargarComboError(1);
                 cargarComboModulo(1);
                 cargarComboProgramador(1);
@@ -118,16 +123,138 @@ $(document).ready(function() {
     cargarUsuariosEnEjecucion(idPartida);
 
 
-    function buscarPregunta(idPartida){
+    function buscarPregunta(idPartida) {
 
-       
 
-        var objData= new FormData();
 
-        objData.append("consultarPregunta",idPartida);
+        var objData = new FormData();
+
+        objData.append("consultarPregunta", idPartida);
 
         $.ajax({
 
+            url: "control/juegoEnProcesoControl.php",
+            type: "post",
+            dataType: "json",
+            data: objData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (respuesta) {
+
+                console.log(respuesta);
+
+                var cartas = new Array("0", "Pedro", "Juan", "Carlos", "Juanita", "Antonio", "Carolina", "Manuel", "Nomina", "Facturación", "Recibos", "Comprobante contable", "Usuarios", "Contabilidad", "404", "Stack overflow", "Memory out of range", "Null pointer", "Syntax error", "Encoding error");
+
+
+
+                var error = cartas[parseInt(respuesta[0][3])];
+                var programador = cartas[parseInt(respuesta[0][1])];
+                var modulo = cartas[parseInt(respuesta[0][2])];
+
+                var usuarioPregunta=parseInt(respuesta[0][4]);
+                idPregunta=parseInt(respuesta[0][0]);
+
+                if(usuarioPregunta==usuarioLocal){
+                    socket.emit('turno2', siguienteJugador);
+                    $(".contenedorEspera").css("display", "block");
+
+
+                }
+
+
+
+
+                alert("Error " + " " + error + " Programador " + programador + " Modulo " + modulo);
+                var pregunta = "Error:  " + " " + error + " Programador: " + programador + " Modulo: " + modulo + "?";
+
+
+                $("#preguntaLlega").html(pregunta);
+                $("#modalRespuesta").modal('toggle');
+
+                var partida = idPartida;
+                var usuario = usuarioLocal;
+                var objCargarCartasUsuario = new FormData();
+                objCargarCartasUsuario.append("partida", partida);
+                objCargarCartasUsuario.append("usuario", usuario);
+                $.ajax({
+                    url: "control/juegoEnProcesoControl.php",
+                    type: "post",
+                    dataType: "json",
+                    data: objCargarCartasUsuario,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (objRespuesta) {
+
+
+
+                        var contadorCartas = 0;
+
+                        objRespuesta.forEach(recorrerCartas);
+
+
+                        function recorrerCartas(item, index) {
+
+                            if (item.idCarta == parseInt(respuesta[0][3])) {
+
+                                $("#selectRespuesta").append('<option value=' + item.idCarta + '>' + item.nombreCarta + '</option>');
+                                contadorCartas++;
+
+                            } else if (item.idCarta == parseInt(respuesta[0][1])) {
+                                $("#selectRespuesta").append('<option value=' + item.idCarta + '>' + item.nombreCarta + '</option>');
+                                contadorCartas++;
+
+                            } else if (item.idCarta == parseInt(respuesta[0][2])) {
+                                $("#selectRespuesta").append('<option value=' + item.idCarta + '>' + item.nombreCarta + '</option>');
+                                contadorCartas++;
+
+                            }
+
+
+
+
+                        }
+
+                        if(contadorCartas!=0){
+                            
+                            document.getElementById('NopuedoResponder').disabled = true;
+
+
+                        }else{
+                            document.getElementById('responder').disabled = false;
+
+                        }
+
+
+
+
+
+
+
+
+
+                    }
+                })
+            }
+
+        })
+
+
+    }
+
+    $("#responder").click(function(){
+
+     var idCarta=$("#selectRespuesta").val();
+
+     if(idCarta!=null){
+
+        var objData = new FormData();
+        objData.append("idCartaRespuesta",idCarta);
+        objData.append("idUsuarioRespues",usuarioLocal);
+        objData.append("idPreguntaR",idPregunta);
+
+        $.ajax({
             url:"control/juegoEnProcesoControl.php",
             type:"post",
             dataType:"json",
@@ -135,38 +262,20 @@ $(document).ready(function() {
             cache:false,
             contentType:false,
             processData:false,
-            success: function(respuesta){
-
-                console.log(respuesta);
-
-                var cartas =new Array("0","Pedro","Juan","Carlos","Juanita","Antonio","Carolina","Manuel","Nomina","Facturación","Recibos","Comprobante contable","Usuarios","Contabilidad","404","Stack overflow","Memory out of range","Null pointer","Syntax error","Encoding error");
-
-                var error=cartas[parseInt(respuesta[0][3])] ;
-                var programador= cartas[parseInt(respuesta[0][1])];
-                var modulo=cartas[parseInt(respuesta[0][2])];
-
-                
-
-                alert("Error "+" "+error+" Programador "+programador+" Modulo "+ modulo);
-                var pregunta= "Error:  "+" "+error+" Programador: "+programador+" Modulo: "+ modulo +"?";
-
-
-                 $("#preguntaLlega").html(pregunta);
-                $("#modalRespuesta").modal('toggle');
-
-
-
-
-                
-
-
+            success: function (respuesta){
 
 
             }
         })
 
 
-    }
+
+     }
+
+     
+
+        
+    })
 
 
 
@@ -187,7 +296,7 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {
+            success: function (respuesta) {
                 console.log(respuesta);
 
                 var siguienteUsuario = "";
@@ -222,7 +331,7 @@ $(document).ready(function() {
         });
     }
 
-    $("#btnSeñalar").click(function() {
+    $("#btnSeñalar").click(function () {
 
         var preguntaProgramador = $("#selectProgramador").val();
         var preguntaModulo = $("#selectModulo").val();
@@ -243,7 +352,7 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {
+            success: function (respuesta) {
 
                 alert(respuesta);
 
@@ -290,31 +399,31 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {},
+            success: function (respuesta) { },
         });
     }
 
     // Diego
 
-    $(".btnMostrarCartas").click(function() {
+    $(".btnMostrarCartas").click(function () {
         $(".btnOcultarCartas").show();
         $(".btnMostrarCartas").hide();
         $(".contenedorCartas").css("transform", "translateY(-330px)");
         $(".contenedorCartas").css("transition", "transform 1s ease-in-out");
-        $("#modalPregunta").modal("toggle");
+        //$("#modalPregunta").modal("toggle");
     });
-    $(".btnOcultarCartas").click(function() {
+    $(".btnOcultarCartas").click(function () {
         $(".btnOcultarCartas").hide();
         $(".btnMostrarCartas").show();
         $(".contenedorCartas").css("transform", "translateY(0px)");
         $(".contenedorCartas").css("transition", "transform 1s ease-in-out");
-        $("#modalPregunta").modal("hide");
+        //$("#modalPregunta").modal("hide");
     });
 
-    $(".btnComenzar").click(function() {
+    $(".btnComenzar").click(function () {
         $(".btnComenzar").hide();
         $(".contenedor__revolver").fadeIn(3000);
-        setTimeout(function() {
+        setTimeout(function () {
             $(".contenedorRandom").css("top", "0px");
             $(".contenedorRandom").css("transition", "top 1s ease-in-out");
         }, 1000);
@@ -333,7 +442,7 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {},
+            success: function (respuesta) { },
         });
 
         var enviar = idPartida + "," + usuarioLocal;
@@ -341,7 +450,13 @@ $(document).ready(function() {
         socket.emit("turno", enviar);
     });
 
-    $(".btnSalirRandom").click(function() {
+    $(".btnSalirRandom").click(function () {
+        salir();
+        
+    });
+
+
+    function salir(){
         $(".primera").addClass("s1");
         $(".segunda").addClass("s2");
         $(".tercera").addClass("s3");
@@ -366,7 +481,7 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(objRespuesta) {
+            success: function (objRespuesta) {
                 var img1 =
                     '<img class="imagen__carta" src="' + objRespuesta[0][2] + '" alt="">';
                 var img2 =
@@ -389,7 +504,8 @@ $(document).ready(function() {
                 $("#nombreCarta4").html(nom4);
             },
         });
-    });
+
+    }
 
     function cargarComboProgramador(opcion, principal, idCarta) {
         var cargarProgramador = "ok";
@@ -403,7 +519,7 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(objRespuesta) {
+            success: function (objRespuesta) {
                 if (opcion == 1) {
                     $("#selectProgramador").html("");
                     objRespuesta.forEach(cargarSelectProgramador);
@@ -422,7 +538,7 @@ $(document).ready(function() {
                     objRespuesta.forEach(cargarSelectProgramador);
 
                     function cargarSelectProgramador(item, index) {
-                        if (item.idCarta == idCarta) {} else {
+                        if (item.idCarta == idCarta) { } else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -449,7 +565,7 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(objRespuesta) {
+            success: function (objRespuesta) {
                 if (opcion == 1) {
                     $("#selectModulo").html("");
                     objRespuesta.forEach(cargarSelectModulo);
@@ -468,7 +584,7 @@ $(document).ready(function() {
                     objRespuesta.forEach(cargarSelectModulo);
 
                     function cargarSelectModulo(item, index) {
-                        if (item.idCarta == idCarta) {} else {
+                        if (item.idCarta == idCarta) { } else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -495,7 +611,7 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(objRespuesta) {
+            success: function (objRespuesta) {
                 if (opcion == 1) {
                     $("#selectError").html("");
                     objRespuesta.forEach(cargarSelectError);
@@ -514,7 +630,7 @@ $(document).ready(function() {
                     objRespuesta.forEach(cargarSelectError);
 
                     function cargarSelectError(item, index) {
-                        if (item.idCarta == idCarta) {} else {
+                        if (item.idCarta == idCarta) { } else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -528,7 +644,7 @@ $(document).ready(function() {
             },
         });
     }
-    $("#btnPreguntar").click(function() {
+    $("#btnPreguntar").click(function () {
         var preguntaProgramador = $("#selectProgramador").val();
         var preguntaModulo = $("#selectModulo").val();
         var preguntaError = $("#selectError").val();
@@ -557,16 +673,16 @@ $(document).ready(function() {
             cache: false,
             contentType: false,
             processData: false,
-            success: function(respuesta) {
+            success: function (respuesta) {
                 if (respuesta == "ok") {
 
-                    var enviaR=idPartida+","+siguienteJugador;
+                    var enviaR = idPartida + "," + siguienteJugador;
 
                     socket.emit('pregunta', enviaR);
 
 
 
-                   
+
 
                 } else {
                     alert("No se pudo enviar la pregunta");

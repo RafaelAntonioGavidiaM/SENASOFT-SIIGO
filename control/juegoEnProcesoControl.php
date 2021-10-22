@@ -9,6 +9,8 @@ class controlJuegoProceso
     public $preguntaModulo;
     public $preguntaError;
     public $idUsuario;
+    public $idCarta;
+    public $idPregunta;
 
 
 
@@ -58,6 +60,13 @@ class controlJuegoProceso
 
         $objRespuesta=modeloJuego::consultarUltimaPregunta($this->idPartida);
         echo json_encode($objRespuesta);
+
+    }
+
+    public function ctrlInsertarRespuesta(){
+
+        
+
 
     }
 }
@@ -110,5 +119,16 @@ if(isset($_POST["consultarPregunta"])){
 
     $objJuegoProceso->idPartida=$_POST["consultarPregunta"];
     $objJuegoProceso->ctlrConsultarPregunta();
+
+}
+
+if(isset($_POST["idCartaRespuesta"]) && isset($_POST["idUsuarioRespues"]) && isset($_POST["idPreguntaR"])){
+
+    $objJuegoProceso->idCarta=$_POST["idCartaRespuesta"];
+    $objJuegoProceso->idUsuario=$_POST["idUsuarioRespues"];
+    $objJuegoProceso->idPregunta=$_POST["idPreguntaR"];
+    $objJuegoProceso->ctrlInsertarRespuesta();
+
+
 
 }

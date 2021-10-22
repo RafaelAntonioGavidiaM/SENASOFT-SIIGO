@@ -52,7 +52,7 @@ INSERT INTO `carta` (`idCarta`, `nombreCarta`, `imagen`, `idTipo`) VALUES
 (11, 'Comprobante contable', 'vista/imgCartas/comprobanteContable.png', 2),
 (12, 'Usuarios', 'vista/imgCartas/usuarios.png', 2),
 (13, 'Contabilidad', 'vista/imgCartas/contabilidad.png', 2),
-(14, '403', 'vista/imgCartas/404.png', 3),
+(14, '404', 'vista/imgCartas/404.png', 3),
 (15, 'Stack overflow', 'vista/imgCartas/stackOverflow.png', 3),
 (16, 'Memory out of range', 'vista/imgCartas/outOfMemory.png', 3),
 (17, 'Null pointer', 'vista/imgCartas/nullPointer.png', 3),

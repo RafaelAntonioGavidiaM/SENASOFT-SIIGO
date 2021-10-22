@@ -1,16 +1,23 @@
 // Rafael
 $(document).ready(function(){
 
-    $("#").click(function(){
+    const valores = window.location.search;
+    const urlParams = new URLSearchParams(valores);
+
+    var usuarioLocal = urlParams.get('usuario');
+    var idPartida = urlParams.get('id');
+    var codigo = urlParams.get('cod');
+
+    
 
 
 
 
 
 
-        
-    })
 
+
+  
 
 
 

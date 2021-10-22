@@ -69,6 +69,28 @@ body {
     object-fit: cover;
 }
 
+.spiner1 {
+    position: absolute;
+    left: 0px;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 0px 1rem blue;
+    border-radius: 50%;
+    background: none;
+    border: 3px solid blue;
+    border-left-color: #fff;
+    animation: girar1 1s linear infinite;
+}
+
+@keyframes girar1 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .jugador1__nombre {
     width: 100%;
     text-align: center;
@@ -96,6 +118,28 @@ body {
     border-radius: 50%;
     border: 2px solid var(--colorPrincipal);
     object-fit: cover;
+}
+
+.spiner2 {
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 0px 1rem tomato;
+    border-radius: 50%;
+    background: none;
+    border: 3px solid tomato;
+    border-left-color: #fff;
+    animation: girar2 1s linear infinite;
+}
+
+@keyframes girar2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .jugador2__nombre {
@@ -127,6 +171,28 @@ body {
     object-fit: cover;
 }
 
+.spiner3 {
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 0px 1rem green;
+    border-radius: 50%;
+    background: none;
+    border: 3px solid green;
+    border-left-color: #fff;
+    animation: girar3 1s linear infinite;
+}
+
+@keyframes girar3 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .jugador3__nombre {
     width: 100%;
     text-align: center;
@@ -154,6 +220,28 @@ body {
     border-radius: 50%;
     border: 2px solid var(--colorPrincipal);
     object-fit: cover;
+}
+
+.spiner4 {
+    position: absolute;
+    left: 0px;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 0px 1rem purple;
+    border-radius: 50%;
+    background: none;
+    border: 3px solid purple;
+    border-left-color: #fff;
+    animation: girar4 1s linear infinite;
+}
+
+@keyframes girar4 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .jugador4__nombre {
@@ -194,6 +282,7 @@ body {
     overflow: hidden;
     transition: bottom 1s ease-in-out;
     background: rgba(255, 255, 255, 0.562);
+    z-index: 2000;
 }
 
 .carta .carta__frente {
@@ -488,4 +577,40 @@ body {
     width: 50%;
     height: 50%;
     border: 1 solid var(--colorPrincipal);
+}
+
+.modal-header,
+.modal-footer {
+    background: var(--colorPrincipal);
+}
+
+.modal-title {
+    color: #fff;
+}
+
+#btnPreguntar,
+#btnSeñalar {
+    background: none;
+    outline: none;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transition: background, color .6s ease;
+}
+
+#btnPreguntar:hover,
+#btnSeñalar:hover {
+    background: #fff;
+    color: var(--colorPrincipal);
+    transition: background, color .6s ease;
+}
+
+.select {
+    width: 500px;
+    height: 30px;
+    outline: none;
+}
+
+.cartah1 {
+    margin-top: 20px;
 }

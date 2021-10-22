@@ -13,6 +13,7 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="vista/js/juegoCrear.js"></script>
   <script src="vista/js/juegoEnEspera.js"></script>
+  <script src="vista/js/juegoFinalizado.js"></script>
   <script src="vista/js/juegoEnProceso.js"></script>
 </head>
 
@@ -20,25 +21,29 @@
   <div class="contenedor">
     <div class="jugador1">
       <div class="contenedor__img">
-        <img src="vista/img/jugador1.jpg" class="jugador1__img" alt="" />
+        <img src="vista/img/J1.png" class="jugador1__img" alt="" />
+        <span class="spiner1"></span>
       </div>
       <h1 class="jugador1__nombre" id="jugador1">Espera..</h1>
     </div>
     <div class="jugador2">
       <h1 class="jugador2__nombre" id="jugador2">Espera..</h1>
       <div class="contenedor__img">
-        <img src="vista/img/jugador1.jpg" class="jugador2__img" alt="" />
+        <img src="vista/img/J2.png" class="jugador2__img" alt="" />
+        <span class="spiner2"></span>
       </div>
     </div>
     <div class="jugador3">
       <h1 class="jugador3__nombre" id="jugador3">Espera..</h1>
       <div class="contenedor__img">
-        <img src="vista/img/jugador1.jpg" class="jugador3__img" alt="" />
+        <img src="vista/img/J3.png" class="jugador3__img" alt="" />
+        <span class="spiner3"></span>
       </div>
     </div>
     <div class="jugador4">
       <div class="contenedor__img">
-        <img src="vista/img/jugador1.jpg" class="jugador4__img" alt="" />
+        <img src="vista/img/J4.png" class="jugador4__img" alt="" />
+        <span class="spiner4"></span>
       </div>
       <h1 class="jugador4__nombre" id="jugador4">Espera..</h1>
     </div>
@@ -136,12 +141,32 @@
               <h4 class="modal-title">Es tu turno ¿quieres preguntar o señalar?</h4>
             </div>
             <div class="modal-body">
-
+              <center>
+                <h2>¿Quieres Preguntar o Señalar?</h2>
+                <p>El programador:
+                  <select id="selectProgramador" class="select" aria-label=".form-select-lg example">
+                    <option selected place>Seleccionar Programador</option>
+                  </select>
+                </p>
+                <br>
+                <p>En el modulo:
+                  <select id="selectModulo" class="select" aria-label=".form-select-lg example">
+                    <option selected place>Seleccionar Modulo</option>
+                  </select>
+                </p>
+                <br>
+                <p>Con el error:
+                  <select id="selectError" class="select" aria-label=".form-select-lg example">
+                    <option selected place>Seleccionar Error</option>
+                  </select>
+                </p>
+              </center>
             </div>
             <div class="modal-footer">
-              <button id="btnPreguntar" type="button" class="btn btn-default" data-dismiss="modal">Preguntar</button>
-              <button id="btnSeñalar" type="button" class="btn btn-default" data-dismiss="modal">Señalar</button>
-              <button type="button" class="btn btn-primary">Cerrar</button>
+              <center>
+                <button id="btnPreguntar" type="button" idSiguiente="" class="btn btn-default" data-dismiss="modal">Preguntar</button>
+                <button id="btnSeñalar" type="button" idSiguiente="" class="btn btn-default" data-dismiss="modal">Señalar</button>
+              </center>
             </div>
           </div>
         </div>
@@ -164,10 +189,12 @@
           <h1 class="titulo__carta__frente">SIIGO</h1>
         </div>
         <div class="carta__atras">
-          <div class="cabecera__carta">
-            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+          <div id="imagenCarta1" class="cabecera__carta">
+
           </div>
-          <h1>Nombre Carta</h1>
+          <div id="nombreCarta1">
+
+          </div>
         </div>
       </div>
 
@@ -176,10 +203,12 @@
           <h1 class="titulo__carta__frente">SIIGO</h1>
         </div>
         <div class="carta__atras">
-          <div class="cabecera__carta">
-            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+          <div id="imagenCarta2" class="cabecera__carta">
+
           </div>
-          <h1>Nombre Carta</h1>
+          <div id="nombreCarta2">
+
+          </div>
         </div>
       </div>
 
@@ -188,10 +217,12 @@
           <h1 class="titulo__carta__frente">SIIGO</h1>
         </div>
         <div class="carta__atras">
-          <div class="cabecera__carta">
-            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+          <div id="imagenCarta3" class="cabecera__carta">
+
           </div>
-          <h1>Nombre Carta</h1>
+          <div id="nombreCarta3">
+
+          </div>
         </div>
       </div>
 
@@ -200,10 +231,12 @@
           <h1 class="titulo__carta__frente">SIIGO</h1>
         </div>
         <div class="carta__atras">
-          <div class="cabecera__carta">
-            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+          <div id="imagenCarta4" class="cabecera__carta">
+
           </div>
-          <h1>Nombre Carta</h1>
+          <div id="nombreCarta4">
+
+          </div>
         </div>
       </div>
 
@@ -229,12 +262,34 @@
         <h1 class="tituloEspera">Partida En Espera</h1>
       </div>
       <center>
-        <h1 id="mesaNumeroEspera" style="color: #fff;">
-          Mesa N°
-        </h1>
+        <div id="numeroMesaEspera">
+   
+        </div>
       </center>
     </div>
   </div>
+
+  <div class="modal fade" id="modalRespuesta">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <h1 id="preguntaLlega"></h1>
+          <select id="selectRespuesta" class="select" aria-label=".form-select-lg example">
+            <option selected place>Seleccionar Respuesta</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

@@ -241,14 +241,15 @@ class modeloJuego
         $objRespuesta = null;
         return $listarProgramadores;
     }
-    public static function mdlEnviarPregunta($preguntaProgramador,$preguntaModulo,$preguntaError)
+    public static function mdlEnviarPregunta($preguntaProgramador,$preguntaModulo,$preguntaError,$idUsuario)
     {
         $mensaje = "";
         try {
-            $objRespuesta = Conexion::conectar()->prepare("INSERT INTO pregunta(preguntaProgramador,preguntaModulo,preguntaError)VALUES(:preguntaProgramador,:preguntaModulo,:preguntaError)");
+            $objRespuesta = Conexion::conectar()->prepare("INSERT INTO pregunta(preguntaProgramador,preguntaModulo,preguntaError,idUsuario)VALUES(:preguntaProgramador,:preguntaModulo,:preguntaError,:idUsuario)");
             $objRespuesta->bindParam(":preguntaProgramador", $preguntaProgramador, PDO::PARAM_STR);
             $objRespuesta->bindParam(":preguntaModulo", $preguntaModulo, PDO::PARAM_STR);
             $objRespuesta->bindParam(":preguntaError", $preguntaError, PDO::PARAM_STR);
+            $objRespuesta->bindParam(":idUsuario", $idUsuario, PDO::PARAM_STR);
             if ($objRespuesta->execute()) {
                 $mensaje = "ok";
             } else {
@@ -260,6 +261,72 @@ class modeloJuego
         }
 
         return $mensaje;
+    }
+
+
+    public static function mdlSenalar($preguntaProgramador,$preguntaModulo,$preguntaError,$idPartida){
+
+        $objConsulta= conexion::conectar()->prepare("SELECT cartapartida.idCartaPartida,cartapartida.idCarta,carta.nombreCarta FROM reto.cartapartida  inner join carta on carta.idCarta=cartapartida.idCarta WHERE idPartida=".$idPartida." order by(idTipo)");
+        $objConsulta->execute();
+        $lista=$objConsulta->fetchAll();
+
+        $contadorR=0;
+
+        $contador2=0;
+
+        foreach ($lista as $key => $value) {
+
+            if($contador2==0){
+
+                if($preguntaProgramador==$value["idCarta"]){
+                    $contadorR++;
+
+                }
+
+
+            }else if($contador2==1){
+
+                if($preguntaModulo==$value["idCarta"]){
+                    $contadorR++;
+
+                }
+
+            }else if($contador2==2){
+
+                if($preguntaError==$value["idCarta"]){
+
+                    $contadorR++;
+                }
+            }
+
+            $contador2++;
+        }
+            
+            
+
+            
+        
+
+$mensaje="";
+        if($contadorR==3){
+            $mensaje="Gano";
+
+        }else{
+            $mensaje="No";
+        }
+
+        return $mensaje;
+
+
+
+    } 
+    public static function mdlCargarCartaUsuario($idPartida,$idUsuario)
+    {
+        $objRespuesta = Conexion::conectar()->prepare("select carta.idCarta,carta.nombreCarta,carta.imagen from carta inner join cartausuariopartida on carta.idCarta=cartausuariopartida.idCarta where  cartausuariopartida.idUsuario=$idUsuario;");
+        $objRespuesta->execute();
+        $listaCartaUsuario = $objRespuesta->fetchAll();
+        $objRespuesta = null;
+        return $listaCartaUsuario;
     }
 
 }

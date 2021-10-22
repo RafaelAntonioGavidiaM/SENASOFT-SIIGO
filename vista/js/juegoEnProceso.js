@@ -1,5 +1,5 @@
 // Rafael
-$(document).ready(function () {
+$(document).ready(function() {
 
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         if (variable == codigo) {
             cargarUsuariosEnEjecucion(idPartida);
-            
+
 
         }
 
@@ -31,17 +31,17 @@ $(document).ready(function () {
 
     socket.on('gano', function(variable) {
 
-       
-        
-
-        
-            alert("Ya hay un Ganador");
-            window.location.replace("index.html");
-
-        
 
 
-        
+
+
+        alert("Ya hay un Ganador");
+        window.location.replace("index.html");
+
+
+
+
+
 
 
 
@@ -51,11 +51,11 @@ $(document).ready(function () {
 
 
 
-   
-    socket.on('turno', function (variable) {
+
+    socket.on('turno', function(variable) {
 
 
-        var valores=variable.split(",");
+        var valores = variable.split(",");
 
         //alert(valores[0]+" "+ valores[1]);
 
@@ -63,10 +63,10 @@ $(document).ready(function () {
 
 
 
-        if (valores[1] == usuarioLocal && valores[0]==idPartida) {
+        if (valores[1] == usuarioLocal && valores[0] == idPartida) {
 
 
-            setTimeout(function () {
+            setTimeout(function() {
                 cargarComboError(1);
                 cargarComboModulo(1);
                 cargarComboProgramador(1);
@@ -75,7 +75,7 @@ $(document).ready(function () {
             }, 8000);
 
 
-        } else if(valores[0]==idPartida) {
+        } else if (valores[0] == idPartida) {
 
             alert("esperanzdo tu truno");
         }
@@ -123,11 +123,11 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (respuesta) {
+            success: function(respuesta) {
 
                 console.log(respuesta);
 
-                
+
 
                 var siguienteUsuario = "";
                 var contador = 0;
@@ -160,10 +160,10 @@ $(document).ready(function () {
 
                 }
 
-                
+
                 if (contador + 1 != 4) {
-                    $("#btnPreguntar").attr("idSiguiente", respuesta[contador+1][0]);
-                    $("#btnSeñalar").attr("idSiguiente", respuesta[contador+1][0]);
+                    $("#btnPreguntar").attr("idSiguiente", respuesta[contador + 1][0]);
+                    $("#btnSeñalar").attr("idSiguiente", respuesta[contador + 1][0]);
 
 
 
@@ -214,29 +214,29 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (respuesta) { },
+            success: function(respuesta) {},
         });
     }
 
     // Diego
 
-    $(".btnMostrarCartas").click(function () {
+    $(".btnMostrarCartas").click(function() {
         $(".btnOcultarCartas").show();
         $(".btnMostrarCartas").hide();
         $(".contenedorCartas").css("transform", "translateY(-330px)");
         $(".contenedorCartas").css("transition", "transform 1s ease-in-out");
     });
-    $(".btnOcultarCartas").click(function () {
+    $(".btnOcultarCartas").click(function() {
         $(".btnOcultarCartas").hide();
         $(".btnMostrarCartas").show();
         $(".contenedorCartas").css("transform", "translateY(0px)");
         $(".contenedorCartas").css("transition", "transform 1s ease-in-out");
     });
 
-    $(".btnComenzar").click(function () {
+    $(".btnComenzar").click(function() {
         $(".btnComenzar").hide();
         $(".contenedor__revolver").fadeIn(3000);
-        setTimeout(function () {
+        setTimeout(function() {
             $(".contenedorRandom").css("top", "0px");
             $(".contenedorRandom").css("transition", "top 1s ease-in-out");
         }, 1000);
@@ -258,14 +258,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (respuesta) {
-
-
-
-
-
-
-
+            success: function(respuesta) {
 
 
             }
@@ -273,23 +266,13 @@ $(document).ready(function () {
 
         })
 
-        var enviar=idPartida+","+usuarioLocal;
+        var enviar = idPartida + "," + usuarioLocal;
 
         socket.emit('turno', enviar);
 
-
-
-
-
-
-
-
-
-
-
     });
 
-    $(".btnSalirRandom").click(function () {
+    $(".btnSalirRandom").click(function() {
         $(".primera").addClass('s1');
         $(".segunda").addClass('s2');
         $(".tercera").addClass('s3');
@@ -301,6 +284,34 @@ $(document).ready(function () {
         $(".contenedorRandom").css("transition", "top 1s ease-in-out");
         $(".contenedorCartas").fadeIn(6500);
 
+        var partida = idPartida;
+        var usuario = usuarioLocal;
+        var objCargarCartasUsuario = new FormData();
+        objCargarCartasUsuario.append("partida", partida);
+        objCargarCartasUsuario.append("usuario", usuario);
+        $.ajax({
+            url: "control/juegoEnProcesoControl.php",
+            type: "post",
+            dataType: "json",
+            data: objCargarCartasUsuario,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(objRespuesta) {
+                var img1 = '<img class="imagen__carta" src="' + objRespuesta[0][2] + '" alt="">';
+                var img2 = '<img class="imagen__carta" src="' + objRespuesta[1][2] + '" alt="">';
+                var img3 = '<img class="imagen__carta" src="' + objRespuesta[2][2] + '" alt="">';
+                var img4 = '<img class="imagen__carta" src="' + objRespuesta[3][2] + '" alt="">';
+                console.log(img1);
+                console.log(img2);
+                console.log(img3);
+                console.log(img4);
+                $("#imagenCarta1").html(img1);
+                $("#imagenCarta2").html(img2);
+                $("#imagenCarta3").html(img3);
+                $("#imagenCarta4").html(img4);
+            }
+        });
     });
 
     function cargarComboProgramador(opcion, principal, idCarta) {
@@ -315,7 +326,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (objRespuesta) {
+            success: function(objRespuesta) {
                 if (opcion == 1) {
                     $("#selectProgramador").html("");
                     objRespuesta.forEach(cargarSelectProgramador);
@@ -334,7 +345,7 @@ $(document).ready(function () {
                     objRespuesta.forEach(cargarSelectProgramador);
 
                     function cargarSelectProgramador(item, index) {
-                        if (item.idCarta == idCarta) { } else {
+                        if (item.idCarta == idCarta) {} else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -361,7 +372,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (objRespuesta) {
+            success: function(objRespuesta) {
                 if (opcion == 1) {
                     $("#selectModulo").html("");
                     objRespuesta.forEach(cargarSelectModulo);
@@ -380,7 +391,7 @@ $(document).ready(function () {
                     objRespuesta.forEach(cargarSelectModulo);
 
                     function cargarSelectModulo(item, index) {
-                        if (item.idCarta == idCarta) { } else {
+                        if (item.idCarta == idCarta) {} else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -407,7 +418,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (objRespuesta) {
+            success: function(objRespuesta) {
                 if (opcion == 1) {
                     $("#selectError").html("");
                     objRespuesta.forEach(cargarSelectError);
@@ -426,7 +437,7 @@ $(document).ready(function () {
                     objRespuesta.forEach(cargarSelectError);
 
                     function cargarSelectError(item, index) {
-                        if (item.idCarta == idCarta) { } else {
+                        if (item.idCarta == idCarta) {} else {
                             concatenar +=
                                 '<option value="' +
                                 item.idCarta +
@@ -440,7 +451,7 @@ $(document).ready(function () {
             },
         });
     }
-    $("#btnPreguntar").click(function () {
+    $("#btnPreguntar").click(function() {
         var preguntaProgramador = $("#selectProgramador").val();
         var preguntaModulo = $("#selectModulo").val();
         var preguntaError = $("#selectError").val();
@@ -450,7 +461,7 @@ $(document).ready(function () {
         objEnviarPreguntas.append("preguntaProgramador", preguntaProgramador);
         objEnviarPreguntas.append("preguntaModulo", preguntaModulo);
         objEnviarPreguntas.append("preguntaError", preguntaError);
-        objEnviarPreguntas.append("idUsuario",usuarioLocal);
+        objEnviarPreguntas.append("idUsuario", usuarioLocal);
 
         $.ajax({
             url: "control/juegoEnProcesoControl.php",
@@ -460,7 +471,7 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (respuesta) {
+            success: function(respuesta) {
                 if (respuesta == "ok") {
                     alert("pregunta enviada");
                 } else {
@@ -471,7 +482,7 @@ $(document).ready(function () {
     });
 
 
-   
+
 
 
     // Edisson

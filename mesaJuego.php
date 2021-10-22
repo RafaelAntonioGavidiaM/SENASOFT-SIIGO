@@ -185,8 +185,20 @@
           <h1 class="titulo__carta__frente">SIIGO</h1>
         </div>
         <div class="carta__atras">
-          <div class="cabecera__carta">
-            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+          <div id="imagenCarta1" class="cabecera__carta">
+
+          </div>
+          <h1 id="nombreCarta1"></h1>
+        </div>
+      </div>
+
+      <div class="col-sm-3 carta">
+        <div class="carta__frente">
+          <h1 class="titulo__carta__frente">SIIGO</h1>
+        </div>
+        <div class="carta__atras">
+          <div id="imagenCarta2" class="cabecera__carta">
+
           </div>
           <h1>Nombre Carta</h1>
         </div>
@@ -197,8 +209,8 @@
           <h1 class="titulo__carta__frente">SIIGO</h1>
         </div>
         <div class="carta__atras">
-          <div class="cabecera__carta">
-            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
+          <div id="imagenCarta3" class="cabecera__carta">
+
           </div>
           <h1>Nombre Carta</h1>
         </div>
@@ -209,20 +221,8 @@
           <h1 class="titulo__carta__frente">SIIGO</h1>
         </div>
         <div class="carta__atras">
-          <div class="cabecera__carta">
-            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
-          </div>
-          <h1>Nombre Carta</h1>
-        </div>
-      </div>
+          <div id="imagenCarta4" class="cabecera__carta">
 
-      <div class="col-sm-3 carta">
-        <div class="carta__frente">
-          <h1 class="titulo__carta__frente">SIIGO</h1>
-        </div>
-        <div class="carta__atras">
-          <div class="cabecera__carta">
-            <img class="imagen__carta" src="vista/img/jugador1.jpg" alt="">
           </div>
           <h1>Nombre Carta</h1>
         </div>
@@ -256,6 +256,28 @@
       </center>
     </div>
   </div>
+  
+  <div class="modal fade" id="modalRespuesta">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <h1>Cargar pregunta</h1>
+          <select id="selectRespuesta" class="select" aria-label=".form-select-lg example">
+            <option selected place>Seleccionar Respuesta</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

@@ -21,7 +21,6 @@ $(document).ready(function() {
         }
     });
 
-<<<<<<< HEAD
     socket.on('pregunta', function (variable) {
 
         var valores = variable.split(",");
@@ -54,9 +53,6 @@ $(document).ready(function() {
     });
 
     socket.on('turno2', function (variable) {
-=======
-    socket.on('turno2', function(variable) {
->>>>>>> f166efc0326739a6799d36f169131a2a2fab78a6
 
         console.log(variable);
         alert(variable);

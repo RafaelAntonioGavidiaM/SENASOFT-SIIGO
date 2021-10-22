@@ -21,25 +21,29 @@
   <div class="contenedor">
     <div class="jugador1">
       <div class="contenedor__img">
-        <img src="vista/img/jugador1.jpg" class="jugador1__img" alt="" />
+        <img src="vista/img/J1.png" class="jugador1__img" alt="" />
+        <span class="spiner1"></span>
       </div>
       <h1 class="jugador1__nombre" id="jugador1">Espera..</h1>
     </div>
     <div class="jugador2">
       <h1 class="jugador2__nombre" id="jugador2">Espera..</h1>
       <div class="contenedor__img">
-        <img src="vista/img/jugador1.jpg" class="jugador2__img" alt="" />
+        <img src="vista/img/J2.png" class="jugador2__img" alt="" />
+        <span class="spiner2"></span>
       </div>
     </div>
     <div class="jugador3">
       <h1 class="jugador3__nombre" id="jugador3">Espera..</h1>
       <div class="contenedor__img">
-        <img src="vista/img/jugador1.jpg" class="jugador3__img" alt="" />
+        <img src="vista/img/J3.png" class="jugador3__img" alt="" />
+        <span class="spiner3"></span>
       </div>
     </div>
     <div class="jugador4">
       <div class="contenedor__img">
-        <img src="vista/img/jugador1.jpg" class="jugador4__img" alt="" />
+        <img src="vista/img/J4.png" class="jugador4__img" alt="" />
+        <span class="spiner4"></span>
       </div>
       <h1 class="jugador4__nombre" id="jugador4">Espera..</h1>
     </div>
@@ -188,7 +192,9 @@
           <div id="imagenCarta1" class="cabecera__carta">
 
           </div>
-          <h1 id="nombreCarta1"></h1>
+          <div id="nombreCarta1">
+
+          </div>
         </div>
       </div>
 
@@ -200,7 +206,9 @@
           <div id="imagenCarta2" class="cabecera__carta">
 
           </div>
-          <h1>Nombre Carta</h1>
+          <div id="nombreCarta2">
+
+          </div>
         </div>
       </div>
 
@@ -212,7 +220,9 @@
           <div id="imagenCarta3" class="cabecera__carta">
 
           </div>
-          <h1>Nombre Carta</h1>
+          <div id="nombreCarta3">
+
+          </div>
         </div>
       </div>
 
@@ -224,7 +234,9 @@
           <div id="imagenCarta4" class="cabecera__carta">
 
           </div>
-          <h1>Nombre Carta</h1>
+          <div id="nombreCarta4">
+
+          </div>
         </div>
       </div>
 
@@ -250,13 +262,13 @@
         <h1 class="tituloEspera">Partida En Espera</h1>
       </div>
       <center>
-        <h1 id="mesaNumeroEspera" style="color: #fff;">
-          Mesa N°
-        </h1>
+        <div id="numeroMesaEspera">
+   
+        </div>
       </center>
     </div>
   </div>
-  
+
   <div class="modal fade" id="modalRespuesta">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -265,7 +277,7 @@
           <h4 class="modal-title">Modal title</h4>
         </div>
         <div class="modal-body">
-          <h1>Cargar pregunta</h1>
+          <h1 id="preguntaLlega"></h1>
           <select id="selectRespuesta" class="select" aria-label=".form-select-lg example">
             <option selected place>Seleccionar Respuesta</option>
           </select>

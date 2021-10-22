@@ -9,15 +9,14 @@ En la estructura del proyecto decidimos manejar distintas carpetas para separar 
 
  - Vista: En esta carpeta estamos manejando sub carpetas como pude ser las de CSS y IMG donde podemos encontramos los distintos diseños, imágenes y alertas plasmados en la pagina web, y la carpeta JS la cual maneja algo de diseño de la pagina, pero esta la utilizamos para poder manejar las acciones de los botones  y de los distintos datos de que se manejan dentro de los inputs.
  
- - Control: En esta carpeta esta compuesta de distintos archivos PHP (imagen)
-
+ - Control: En esta carpeta esta compuesta de distintos archivos PHP 
    como podemos ver en la imagen cada uno de estos archivos esta organizado dependiendo el estado de la partida desde crear la partida hasta finalizar la partida, el cual esta encargado de recibir los datos que se envían desde el $.ajax de la carpeta vista y la sub carpeta de   JS.
- - Modelo: En esta carpeta esta compuesta por distintos archivos PHP el cual esta el archivo de conexion.php este esta encargado de hacer la conexión a la base de datos y el resto de archivos que también están organizados por el estado del juego es decir desde el momento que se esta creando la partida hasta que se finaliza la partida, cada uno de estos archivos son los que hacen las consultas requeridas para cada proceso a la base de datos y hace poder avanzar en el juego.(imagen)
+ - Modelo: En esta carpeta esta compuesta por distintos archivos PHP el cual esta el archivo de conexion.php este esta encargado de hacer la conexión a la base de datos y el resto de archivos que también están organizados por el estado del juego es decir desde el momento que se esta creando la partida hasta que se finaliza la partida, cada uno de estos archivos son los que hacen las consultas requeridas para cada proceso a la base de datos y hace poder avanzar en el juego.
   - imgCartas: En esta carpeta se guarta todas las imagenes que ese utilizaron en la tabla carta y asi podiamos llamar la imagen en el apartado de mesajuego.php 
 
 ## Base de datos
 
-La base de datos que utilizamos para realizar este proyecto fue MySQL, a continuación se mostrara el diseño de la base de datos que se utilizo para la realización de este proyecto con sus respectivas relaciones(imagen)
+La base de datos que utilizamos para realizar este proyecto fue MySQL, a continuación se mostrara el diseño de la base de datos que se utilizo para la realización de este proyecto con sus respectivas relaciones
 
 ## Node.js-Importante
 
